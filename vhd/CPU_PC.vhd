@@ -29,7 +29,8 @@ architecture RTL of CPU_PC is
         S_Pre_Fetch,
         S_Fetch,
         S_Decode,
-        S_LUI
+        S_LUI,
+        S_ADDI
     );
 
     signal state_d, state_q : State_type;
@@ -127,6 +128,12 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_LUI;
+                elsif status.IR(6 downto 0) = "0010011" then -- code op addi
+                    -- on incrémente PC comme avec lui
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                    state_d <= S_ADDI;
                 else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
                 end if;
@@ -142,7 +149,7 @@ begin
                 cmd.PC_Y_sel <= PC_Y_immU;
                 cmd.RF_we <= '1';
                 cmd.Data_sel <= DATA_from_pc;
-                -- lecture meme[PC]
+                -- lecture mem[PC]
                 cmd.ADDR_sel <= ADDR_from_pc;
                 cmd.mem_ce <= '1';
                 cmd.mem_we <= '0';
@@ -150,6 +157,19 @@ begin
                 state_d <= S_Fetch;
 
 ---------- Instructions arithmétiques et logiques ----------
+
+            when D_ADDI =>
+                -- chaine de 20 bits de long en dupliquant le bit 31 de IR
+                -- concaténé avec les bits 31 à 20 de IR
+                -- ie. valeur 32 bits avec extension de signe de l'immédiat 
+                -- en compélment à 2 de 12 bits IR
+                
+                -- lecture mem[PC] comme avec lui
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
+                -- next state
+                state_d <= S_Fetch;
 
 ---------- Instructions de saut ----------
 
