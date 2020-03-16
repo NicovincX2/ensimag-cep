@@ -3,9 +3,10 @@
     
     # addi rd, rs1, imm
     # le registre x0 vaut toujours 0
-    addi x31, x0, 0       # x31 = 0
-	addi x31, x0, 1048575 # x31 = valeur maximal sur 20 bits
-	addi x31, x0, -56 # x31 = valeur quelconque
+    addi zero, zero, 0    # no operation
+    addi x31, x0, 0       # copy register
+	addi x31, x0, -2048   # li x31, -2048
+	addi x31, zero, -1    # li x31, 0xFFFFF
 
 	# max_cycle 50
     # 00000000
