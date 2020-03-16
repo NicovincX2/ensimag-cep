@@ -158,7 +158,7 @@ begin
 
 ---------- Instructions arithmétiques et logiques ----------
 
-            when D_ADDI =>
+            when S_ADDI =>
                 -- chaine de 20 bits de long en dupliquant le bit 31 de IR
                 -- concaténé avec les bits 31 à 20 de IR
                 -- ie. valeur 32 bits avec extension de signe de l'immédiat 
