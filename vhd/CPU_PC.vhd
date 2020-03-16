@@ -162,8 +162,11 @@ begin
                 -- chaine de 20 bits de long en dupliquant le bit 31 de IR
                 -- concaténé avec les bits 31 à 20 de IR
                 -- ie. valeur 32 bits avec extension de signe de l'immédiat 
-                -- en compélment à 2 de 12 bits IR
-                
+                -- en complément à 2 de 12 bits IR
+                cmd.ALU_op <= ALU_plus;
+                cmd.ALU_Y_sel <= ALU_Y_immI;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA_from_alu;
                 -- lecture mem[PC] comme avec lui
                 cmd.ADDR_sel <= ADDR_from_pc;
                 cmd.mem_ce <= '1';
