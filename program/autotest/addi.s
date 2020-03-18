@@ -9,7 +9,7 @@
 	addi x31, zero, -1    # li x31, 0xFFFF
 
 	# max_cycle 50
-	# pout_begin
+	# pout_start
     # 00000000
     # 00000000
     # F8000000
