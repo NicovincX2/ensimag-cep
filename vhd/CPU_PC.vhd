@@ -144,6 +144,9 @@ begin
 ---------- Instructions avec immediat de type U ----------
 
             when S_LUI =>
+                -- loads the sign-extended 20-bit immediate,imm, into register rd
+                -- valide seulement lorsque rd!=x0
+                -- li expands into addi rd, x0, imm[21:0].
                 -- rd <- ImmU + 0
                 cmd.PC_X_sel <= PC_X_cst_x00;
                 cmd.PC_Y_sel <= PC_Y_immU;
