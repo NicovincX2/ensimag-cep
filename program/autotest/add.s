@@ -14,11 +14,11 @@
     addi x2, x0, -5
     add x31, x1, x2
 
-    # add x31, x0, x0
-    # addi x1, x0, -2048
-    # addi x2, x0, 0
-    # add x31, x1, x2
-    #
+    add x31, x0, x0
+    addi x1, x0, -2048
+    addi x2, x0, 0
+    add x31, x1, x2
+
     # add x31, x0, x0
     # addi x1, x0, 2046
     # addi x2, x0, 1
@@ -30,8 +30,8 @@
     # 00000002
     # 00000000
     # 00000000
-	# pout_end
     # 00000000
     # FFFFF800
+	# pout_end
     # 00000000
     # 000007FF
