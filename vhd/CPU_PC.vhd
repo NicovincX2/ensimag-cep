@@ -30,7 +30,8 @@ architecture RTL of CPU_PC is
         S_Fetch,
         S_Decode,
         S_LUI,
-        S_ADDI
+        S_ADDI,
+        S_ADD
     );
 
     signal state_d, state_q : State_type;
@@ -183,7 +184,7 @@ begin
                 -- next state
                 state_d <= S_Fetch;
 
-            when S_ADDI =>
+            when S_ADD =>
                 -- rd <- rs1 + rs2
                 cmd.ALU_op <= ALU_plus;
                 cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
