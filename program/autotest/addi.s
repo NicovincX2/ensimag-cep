@@ -17,4 +17,3 @@
     # FFFFF800
     # 000007FF
 	# pout_end
-	# FFFFFFF0
