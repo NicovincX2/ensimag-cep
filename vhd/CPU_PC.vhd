@@ -131,22 +131,22 @@ begin
                     cmd.PC_we <= '1';
                     state_d <= S_LUI;
                 elsif (status.IR(6 downto 0) = "0010011" and
-                    status.IR(14 downto 12) == "000") then -- code op addi
+                    status.IR(14 downto 12) = "000") then -- code op addi
                     -- on incrémente PC comme avec lui
                     cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_ADDI;
                 elsif (status.IR(6 downto 0) = "0110011" and
-                    status.IR(14 downto 12) == "001" and 
-                    status.IR(31 downto 25) == "0000000") then -- code op sll
+                    status.IR(14 downto 12) = "001" and 
+                    status.IR(31 downto 25) = "0000000") then -- code op sll
                     cmd.TO_PC_Y_sel <= TO_Pc_Y_cst_x04;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_SSL;
                 elsif (status.IR(6 downto 0) = "0110011" and
-                    status.IR(14 downto 12) == "000" and
-                    status.IR(31 downto 25) == "0000000") then -- code op add
+                    status.IR(14 downto 12) = "000" and
+                    status.IR(31 downto 25) = "0000000") then -- code op add
                     -- on incrémente PC comme avec lui
                     cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                     cmd.PC_sel <= PC_from_pc;
