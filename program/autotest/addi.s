@@ -13,7 +13,7 @@
 	# max_cycle 50
 	# pout_start
     # 00000000
-    # 0000F800
+    # F8000000
 	# pout_end
 	# FFFF0000
 	# FFFFFFF0
