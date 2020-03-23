@@ -6,7 +6,7 @@
     add x31, zero, zero    # no operation
 
     addi x1, x0, 1
-    add x31, x1, x0
+    add x31, x0, x1
 
     addi x1, x0, 5
     addi x2, x1, 6
