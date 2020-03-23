@@ -138,7 +138,7 @@ begin
                     cmd.PC_we <= '1';
                     state_d <= S_ADDI;
                 elsif (status.IR(6 downto 0) = "0110011" and
-                    status.IR(14 downto 12) = "001" and 
+                    status.IR(14 downto 12) = "001" and
                     status.IR(31 downto 25) = "0000000") then -- code op sll
                     cmd.TO_PC_Y_sel <= TO_Pc_Y_cst_x04;
                     cmd.PC_sel <= PC_from_pc;
@@ -197,7 +197,7 @@ begin
 
             when S_SSL =>
                 cmd.SHIFTER_op <= SHIFT_ll;
-                cmd.SHIFTER_Y_sel <= ALU_Y_rf_rs2;
+                cmd.SHIFTER_Y_sel <= SHIFTER_Y_rs2;
                 cmd.RF_we <= '1';
                 cmd.Data_sel <= DATA_from_shifter;
                 --mise à jour PC
