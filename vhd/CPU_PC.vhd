@@ -32,7 +32,7 @@ architecture RTL of CPU_PC is
         S_LUI,
         S_ADDI,
         S_ADD,
-        S_SSL
+        S_SLL
     );
 
     signal state_d, state_q : State_type;
@@ -195,7 +195,7 @@ begin
                 -- next state
                 state_d <= S_Fetch;
 
-            when S_SSL =>
+            when S_SLL =>
                 cmd.SHIFTER_op <= SHIFT_ll;
                 cmd.SHIFTER_Y_sel <= SHIFTER_Y_rs2;
                 cmd.RF_we <= '1';
