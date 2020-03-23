@@ -143,7 +143,7 @@ begin
                     cmd.TO_PC_Y_sel <= TO_Pc_Y_cst_x04;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
-                    state_d <= S_SSL;
+                    state_d <= S_SLL;
                 elsif (status.IR(6 downto 0) = "0110011" and
                     status.IR(14 downto 12) = "000" and
                     status.IR(31 downto 25) = "0000000") then -- code op add
