@@ -24,7 +24,7 @@
 	# pout_start
     # 00000000
     # 00000001
-	# pout_end
     # 0000000B
+	# pout_end
     # FFFFF800
     # 000007FF
