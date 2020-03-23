@@ -134,6 +134,11 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_ADDI;
+                elsif status.IR(6 downto 0) = "0110011" then -- code op sll
+                    cmd.TO_PC_Y_sel <= TO_Pc_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                    state_d <= S_SSL;
                 else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
                 end if;
@@ -177,6 +182,24 @@ begin
                 -- next state
                 state_d <= S_Fetch;
 
+            when S_ADD =>
+                cmd.ALU_op <= ALU_plus;
+                cmd.ALU_Y_sel <= ALU_Y_rs2;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA from_alu;
+                state_d <= S_Fetch;
+
+            when S_SSL =>
+                cmd.SHIFTER_op <= SHIFT_ll;
+                cmd.SHIFTER_Y_sel <= ALU_Y_rf_rs2;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA_from_shifter;
+                --mise à jour PC
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
+                --prochain état
+                state_d <= S_Fetch;
 ---------- Instructions de saut ----------
 
 ---------- Instructions de chargement à partir de la mémoire ----------

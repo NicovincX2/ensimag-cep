@@ -1,6 +1,6 @@
 # TAG = addi
     .text
-    
+
     # addi rd, rs1, imm
     # le registre x0 vaut toujours 0
     addi zero, zero, 0    # no operation
