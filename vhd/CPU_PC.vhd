@@ -98,7 +98,7 @@ begin
 
         case state_q is
             when S_Error =>
-                -- Etat transitoire en cas d'instruction non reconnue 
+                -- Etat transitoire en cas d'instruction non reconnue
                 -- Aucune action
                 state_d <= S_Init;
 
@@ -134,6 +134,12 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_ADDI;
+                elsif status.IR(6 downto 0) = "0110011" then -- code op add
+                    -- on incrémente PC comme avec lui
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                    state_d <= S_ADD;
                 else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
                 end if;
@@ -164,10 +170,23 @@ begin
             when S_ADDI =>
                 -- chaine de 20 bits de long en dupliquant le bit 31 de IR
                 -- concaténé avec les bits 31 à 20 de IR
-                -- ie. valeur 32 bits avec extension de signe de l'immédiat 
+                -- ie. valeur 32 bits avec extension de signe de l'immédiat
                 -- en complément à 2 de 12 bits IR
                 cmd.ALU_op <= ALU_plus;
                 cmd.ALU_Y_sel <= ALU_Y_immI;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA_from_alu;
+                -- lecture mem[PC] comme avec lui
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
+                -- next state
+                state_d <= S_Fetch;
+
+            when S_ADDI =>
+                -- rd <- rs1 + rs2
+                cmd.ALU_op <= ALU_plus;
+                cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
                 cmd.RF_we <= '1';
                 cmd.Data_sel <= DATA_from_alu;
                 -- lecture mem[PC] comme avec lui
