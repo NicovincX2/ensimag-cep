@@ -232,6 +232,10 @@ begin
                 cmd.PC_Y_sel <= PC_Y_immU;
                 cmd.RF_we <= '1';
                 cmd.Data_sel <= DATA_from_pc;
+                -- incrémentation de PC
+                cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                cmd.PC_sel <= PC_from_pc;
+                cmd.PC_we <= '1';
                 -- lecture mem[PC]
                 -- cmd.ADDR_sel <= ADDR_from_pc;
                 -- cmd.mem_ce <= '1';
