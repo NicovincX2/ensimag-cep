@@ -36,9 +36,9 @@ architecture RTL of CPU_PC is
         S_AUIPC,
         S_AND,
         S_OR,
-        S_ORI,
-        S_ANDI,
         S_XOR,
+        S_ANDI,
+        S_ORI,
         S_XORI,
         S_SUB,
         S_SRL,
@@ -187,6 +187,21 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_OR;
+                elsif (status.IR(6 downto 0) = "0110011" and
+                    status.IR(14 downto 12) = "100" and
+                    status.IR(31 downto 25) = "0000000") then -- code op xor
+                    -- on incrémente PC comme avec lui
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                    state_d <= S_XOR;
+                elsif (status.IR(6 downto 0) = "0010011" and
+                    status.IR(14 downto 12) = "111" then -- code op andi
+                    -- on incrémente PC comme avec lui
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                    state_d <= S_ANDI;
                 elsif (status.IR(6 downto 0) = "0010011" and
                     status.IR(14 downto 12) = "110" then -- code op ori
                     -- on incrémente PC comme avec lui
@@ -195,12 +210,12 @@ begin
                     cmd.PC_we <= '1';
                     state_d <= S_ORI;
                 elsif (status.IR(6 downto 0) = "0010011" and
-                    status.IR(14 downto 12) = "111" then -- code op andi
+                    status.IR(14 downto 12) = "100" then -- code op andi
                     -- on incrémente PC comme avec lui
                     cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
-                    state_d <= S_ANDI;
+                    state_d <= S_XORI;
                 else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
                 end if;
@@ -243,6 +258,19 @@ begin
                 -- next state
                 state_d <= S_Pre_Fetch;
 
+            when S_ANDI =>
+                -- rd <- imm and rs1
+                cmd.LOGICAL_op <= LOGICAL_and;
+                cmd.ALU_Y_sel <= ALU_Y_immI;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA_from_logical;
+                -- lecture mem[PC] comme avec lui
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
+                -- next state
+                state_d <= S_Fetch;
+
             when S_ORI =>
                 -- rd <- imm or rs1
                 cmd.LOGICAL_op <= LOGICAL_or;
@@ -256,9 +284,9 @@ begin
                 -- next state
                 state_d <= S_Fetch;
 
-            when S_ANDI =>
-                -- rd <- imm and rs1
-                cmd.LOGICAL_op <= LOGICAL_and;
+            when S_XORI =>
+                -- rd <- imm or rs1
+                cmd.LOGICAL_op <= LOGICAL_xor;
                 cmd.ALU_Y_sel <= ALU_Y_immI;
                 cmd.RF_we <= '1';
                 cmd.Data_sel <= DATA_from_logical;
@@ -328,6 +356,19 @@ begin
             when S_OR =>
                 -- rd <- rs1 or rs2
                 cmd.LOGICAL_op <= LOGICAL_or;
+                cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA_from_logical;
+                -- lecture mem[PC] comme avec lui
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
+                -- next state
+                state_d <= S_Fetch;
+
+            when S_XOR =>
+                -- rd <- rs1 or rs2
+                cmd.LOGICAL_op <= LOGICAL_xor;
                 cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
                 cmd.RF_we <= '1';
                 cmd.Data_sel <= DATA_from_logical;
