@@ -146,9 +146,9 @@ begin
             when S_Decode =>
                 -- on ne fait pas cet état juste pour les branchements et auipc
                 -- variables des bits de code op
-                last = status.IR(6 downto 0);
-                mid = status.IR(14 downto 12);
-                first = status.IR(31 downto 25);
+                last <= status.IR(6 downto 0);
+                mid <= status.IR(14 downto 12);
+                first <= status.IR(31 downto 25);
                 -- on incrémente PC
                 cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                 cmd.PC_sel <= PC_from_pc;
