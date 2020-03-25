@@ -211,9 +211,9 @@ begin
                         end case;
                 end case;
                 -- on n'a pas changé d'état
-                -- if state_q = S_Decode then
-                --     state_d <= S_Error;
-                -- end if;
+                if state_d = S_Decode then
+                    state_d <= S_Error;
+                end if;
                 -- if last = "0110111" then -- code op lui
                 --     state_d <= S_LUI;
                 -- elsif (last = "0010011" and
