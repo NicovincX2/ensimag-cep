@@ -153,7 +153,7 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_ADD;
-                elsif (status.IR(6 downto 0) = "0010111" then -- code op auipc
+                elsif status.IR(6 downto 0) = "0010111" then -- code op auipc
                     -- on n'incrémente pas PC
                     state_d <= S_AUIPC;
                 else
