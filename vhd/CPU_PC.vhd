@@ -49,6 +49,8 @@ architecture RTL of CPU_PC is
     );
 
     signal state_d, state_q : State_type;
+    signal first, last : std_logic_vector(0 to 6);
+    signal mid: std_logic_vector(0 to 2);
 
 
 begin
