@@ -137,7 +137,7 @@ begin
                 cmd.IR_we <= '1';
                 -- on ne fait pas l'état decode, incrémentation apèrs coup dans l'état concerné
                 -- variables des bits de code op
-                status.IR(6 downto 0) <= status.IR(6 downto 0);
+                -- status.IR(6 downto 0) <= status.IR(6 downto 0);
                 if status.IR(6 downto 0) = "0010111" then -- code op auipc
                     -- on n'incrémente pas PC
                     state_d <= S_AUIPC;
