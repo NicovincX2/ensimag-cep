@@ -48,12 +48,12 @@ architecture RTL of CPU_PC is
         S_SUB
     );
 
-    subtype w7 is unsigned(6 downto 0);
-    subtype w3 is unsigned(2 downto 0);
+    -- subtype w7 is unsigned(6 downto 0);
+    -- subtype w3 is unsigned(2 downto 0);
 
     signal state_d, state_q : State_type;
-    signal first, last : w7;
-    signal mid: w3;
+    -- signal first, last : w7;
+    -- signal mid: w3;
 
 
 begin
@@ -140,8 +140,8 @@ begin
                 cmd.IR_we <= '1';
                 -- on ne fait pas l'état decode, incrémentation apèrs coup dans l'état concerné
                 -- variables des bits de code op
-                last <= status.IR(6 downto 0);
-                if last = "0010111" then -- code op auipc
+                -- last <= status.IR(6 downto 0);
+                if status.IR(6 downto 0) = "0010111" then -- code op auipc
                     -- on n'incrémente pas PC
                     state_d <= S_AUIPC;
                 else
@@ -151,30 +151,30 @@ begin
             when S_Decode =>
                 -- on ne fait pas cet état juste pour les branchements et auipc
                 -- variables des bits de code op
-                last <= status.IR(6 downto 0);
-                mid <= status.IR(14 downto 12);
-                first <= status.IR(31 downto 25);
+                -- last <= status.IR(6 downto 0);
+                -- mid <= status.IR(14 downto 12);
+                -- first <= status.IR(31 downto 25);
                 -- on incrémente PC
                 cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                 cmd.PC_sel <= PC_from_pc;
                 cmd.PC_we <= '1';
-                case last is
+                case status.IR(6 downto 0) is
                     when "0110111" =>
                         state_d <= S_LUI;
                     when "0010011" =>
-                        case mid is
+                        case status.IR(14 downto 12) is
                             when "000" =>
                                 state_d <= S_ADDI;
                             when "001" =>
-                                if first = "0000000" then
+                                if status.IR(31 downto 25) = "0000000" then
                                     state_d <= S_SLLI;
                                 end if;
                             when "100" =>
                                 state_d <= S_XORI;
                             when "101" =>
-                                if first = "0000000" then
+                                if status.IR(31 downto 25) = "0000000" then
                                     state_d <= S_SRLI;
-                                elsif first = "0100000" then
+                                elsif status.IR(31 downto 25) = "0100000" then
                                     state_d <= S_SRAI;
                                 end if;
                             when "110" =>
@@ -182,33 +182,33 @@ begin
                             when "111" =>
                                 state_d <= S_ANDI;
                     when "0110011" =>
-                        case mid is
+                        case status.IR(14 downto 12) is
                             when "000" =>
-                                if first = "0000000" then
+                                if status.IR(31 downto 25) = "0000000" then
                                     state_d <= S_ADD;
-                                elsif first = "0100000" then
+                                elsif status.IR(31 downto 25) = "0100000" then
                                     state_d <= S_SUB;
                                 end if;
                             when "001" =>
-                                if first = "0000000" then
+                                if status.IR(31 downto 25) = "0000000" then
                                     state_d <= S_SLL;
                                 end if;
                             when "100" =>
-                                if first = "0000000" then
+                                if status.IR(31 downto 25) = "0000000" then
                                     state_d <= S_XOR;
                                 end if;
                             when "101" =>
-                                if first = "0000000" then
+                                if status.IR(31 downto 25) = "0000000" then
                                     state_d <= S_SRL;
-                                elsif first = "0100000" then
+                                elsif status.IR(31 downto 25) = "0100000" then
                                     state_d <= S_SRA;
                                 end if;
                             when "110" =>
-                                if first = "0000000" then
+                                if status.IR(31 downto 25) = "0000000" then
                                     state_d <= S_OR;
                                 end if;
                             when "111" =>
-                                if first = "0000000" then
+                                if status.IR(31 downto 25) = "0000000" then
                                     state_d <= S_AND;
                                 end if;
                         end case;
@@ -217,71 +217,71 @@ begin
                 if state_d = S_Decode then
                     state_d <= S_Error;
                 end if;
-                -- if last = "0110111" then -- code op lui
+                -- if status.IR(6 downto 0) = "0110111" then -- code op lui
                 --     state_d <= S_LUI;
-                -- elsif (last = "0010011" and
-                --     mid = "000") then -- code op addi
+                -- elsif (status.IR(6 downto 0) = "0010011" and
+                --     status.IR(14 downto 12) = "000") then -- code op addi
                 --     -- on incrémente PC comme avec lui
                 --     state_d <= S_ADDI;
-                -- elsif (last = "0110011" and
-                --     mid = "001" and
-                --     first = "0000000") then -- code op sll
+                -- elsif (status.IR(6 downto 0) = "0110011" and
+                --     status.IR(14 downto 12) = "001" and
+                --     status.IR(31 downto 25) = "0000000") then -- code op sll
                 --     state_d <= S_SLL;
-                -- elsif (last = "0110011" and
-                --     mid = "101" and
-                --     first = "0000000") then -- code op srl
+                -- elsif (status.IR(6 downto 0) = "0110011" and
+                --     status.IR(14 downto 12) = "101" and
+                --     status.IR(31 downto 25) = "0000000") then -- code op srl
                 --     state_d <= S_SRL;
-                -- elsif (last = "0110011" and
-                --     mid = "101" and
-                --     first = "0100000") then -- code op sra
+                -- elsif (status.IR(6 downto 0) = "0110011" and
+                --     status.IR(14 downto 12) = "101" and
+                --     status.IR(31 downto 25) = "0100000") then -- code op sra
                 --     state_d <= S_SRA;
-                -- elsif (last = "0010011" and
-                --     mid = "001" and
-                --     first = "0000000") then -- code op slli
+                -- elsif (status.IR(6 downto 0) = "0010011" and
+                --     status.IR(14 downto 12) = "001" and
+                --     status.IR(31 downto 25) = "0000000") then -- code op slli
                 --     state_d <= S_SLLI;
-                -- elsif (last = "0010011" and
-                --     mid = "101" and
-                --     first = "0000000") then -- code op srli
+                -- elsif (status.IR(6 downto 0) = "0010011" and
+                --     status.IR(14 downto 12) = "101" and
+                --     status.IR(31 downto 25) = "0000000") then -- code op srli
                 --     state_d <= S_SRLI;
-                -- elsif (last = "0010011" and
-                --     mid = "101" and
-                --     first = "0100000") then -- code op srai
+                -- elsif (status.IR(6 downto 0) = "0010011" and
+                --     status.IR(14 downto 12) = "101" and
+                --     status.IR(31 downto 25) = "0100000") then -- code op srai
                 --     state_d <= S_SRAI;
-                -- elsif (last = "0110011" and
-                --     mid = "000" and
-                --     first = "0000000") then -- code op add
+                -- elsif (status.IR(6 downto 0) = "0110011" and
+                --     status.IR(14 downto 12) = "000" and
+                --     status.IR(31 downto 25) = "0000000") then -- code op add
                 --     -- on incrémente PC comme avec lui
                 --     state_d <= S_ADD;
-                -- elsif (last = "0110011" and
-                --     mid = "000" and
-                --     first = "0100000") then -- code op sub
+                -- elsif (status.IR(6 downto 0) = "0110011" and
+                --     status.IR(14 downto 12) = "000" and
+                --     status.IR(31 downto 25) = "0100000") then -- code op sub
                 --     -- on incrémente PC comme avec lui
                 --     state_d <= S_SUB;
-                -- elsif (last = "0110011" and
-                --     mid = "111" and
-                --     first = "0000000") then -- code op and
+                -- elsif (status.IR(6 downto 0) = "0110011" and
+                --     status.IR(14 downto 12) = "111" and
+                --     status.IR(31 downto 25) = "0000000") then -- code op and
                 --     -- on incrémente PC comme avec lui
                 --     state_d <= S_AND;
-                -- elsif (last = "0110011" and
-                --     mid = "110" and
-                --     first = "0000000") then -- code op or
+                -- elsif (status.IR(6 downto 0) = "0110011" and
+                --     status.IR(14 downto 12) = "110" and
+                --     status.IR(31 downto 25) = "0000000") then -- code op or
                 --     -- on incrémente PC comme avec lui
                 --     state_d <= S_OR;
-                -- elsif (last = "0110011" and
-                --     mid = "100" and
-                --     first = "0000000") then -- code op xor
+                -- elsif (status.IR(6 downto 0) = "0110011" and
+                --     status.IR(14 downto 12) = "100" and
+                --     status.IR(31 downto 25) = "0000000") then -- code op xor
                 --     -- on incrémente PC comme avec lui
                 --     state_d <= S_XOR;
-                -- elsif (last = "0010011" and
-                --     mid = "111") then -- code op andi
+                -- elsif (status.IR(6 downto 0) = "0010011" and
+                --     status.IR(14 downto 12) = "111") then -- code op andi
                 --     -- on incrémente PC comme avec lui
                 --     state_d <= S_ANDI;
-                -- elsif (last = "0010011" and
-                --     mid = "110") then -- code op ori
+                -- elsif (status.IR(6 downto 0) = "0010011" and
+                --     status.IR(14 downto 12) = "110") then -- code op ori
                 --     -- on incrémente PC comme avec lui
                 --     state_d <= S_ORI;
-                -- elsif (last = "0010011" and
-                --     mid = "100") then -- code op xori
+                -- elsif (status.IR(6 downto 0) = "0010011" and
+                --     status.IR(14 downto 12) = "100") then -- code op xori
                 --     -- on incrémente PC comme avec lui
                 --     state_d <= S_XORI;
                 -- else
