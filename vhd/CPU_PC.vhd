@@ -49,8 +49,8 @@ architecture RTL of CPU_PC is
     );
 
     signal state_d, state_q : State_type;
-    signal first, last : std_logic_vector(0 to 6);
-    signal mid: std_logic_vector(0 to 2);
+    signal first, last : unsigned(6 downto 0);
+    signal mid: unsigned(2 downto 0);
 
 
 begin
@@ -213,6 +213,7 @@ begin
                 -- on n'a pas changé d'état
                 if state_q = S_Decode then
                     state_d <= S_ERROR;
+                end if;
                 -- if last = "0110111" then -- code op lui
                 --     state_d <= S_LUI;
                 -- elsif (last = "0010011" and
