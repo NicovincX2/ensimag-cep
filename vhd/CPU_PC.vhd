@@ -121,7 +121,12 @@ begin
             when S_Fetch =>
                 -- IR <- mem_datain
                 cmd.IR_we <= '1';
-                state_d <= S_Decode;
+                if status.IR(6 downto 0) = "0010111" then -- code op auipc
+                    -- on n'incrémente pas PC
+                    state_d <= S_AUIPC;
+                else
+                    state_d <= S_Decode;
+                end if;
 
             when S_Decode =>
                 -- On peut aussi utiliser un case, ...
@@ -153,9 +158,6 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_ADD;
-                elsif status.IR(6 downto 0) = "0010111" then -- code op auipc
-                    -- on n'incrémente pas PC
-                    state_d <= S_AUIPC;
                 else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
                 end if;
@@ -231,9 +233,9 @@ begin
                 cmd.RF_we <= '1';
                 cmd.Data_sel <= DATA_from_pc;
                 -- lecture mem[PC]
-                -- cmd.ADDR_sel <= ADDR_from_pc;
-                -- cmd.mem_ce <= '1';
-                -- cmd.mem_we <= '0';
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
                 -- next state
                 state_d <= S_Fetch;
 
