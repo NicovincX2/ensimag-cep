@@ -48,12 +48,9 @@ architecture RTL of CPU_PC is
         S_SUB
     );
 
-    subtype w7 is unsigned(6 downto 0);
-    subtype w3 is unsigned(2 downto 0);
-
     signal state_d, state_q : State_type;
-    signal first, last : w7;
-    signal mid: w3;
+    signal first, last : unsigned(6 downto 0);
+    signal mid: unsigned(2 downto 0);
 
 
 begin
