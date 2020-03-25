@@ -172,6 +172,14 @@ begin
                     cmd.PC_we <= '1';
                     state_d <= S_ADD;
                 elsif (status.IR(6 downto 0) = "0110011" and
+                    status.IR(14 downto 12) = "000" and
+                    status.IR(31 downto 25) = "0100000") then -- code op add
+                    -- on incrémente PC comme avec lui
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                    state_d <= S_SUB;
+                elsif (status.IR(6 downto 0) = "0110011" and
                     status.IR(14 downto 12) = "111" and
                     status.IR(31 downto 25) = "0000000") then -- code op and
                     -- on incrémente PC comme avec lui
@@ -210,7 +218,7 @@ begin
                     cmd.PC_we <= '1';
                     state_d <= S_ORI;
                 elsif (status.IR(6 downto 0) = "0010011" and
-                    status.IR(14 downto 12) = "100" then -- code op andi
+                    status.IR(14 downto 12) = "100" then -- code op xori
                     -- on incrémente PC comme avec lui
                     cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                     cmd.PC_sel <= PC_from_pc;
@@ -299,6 +307,19 @@ begin
 
 ---------- Instructions arithmétiques et logiques ----------
 
+            when S_ADD =>
+                -- rd <- rs1 + rs2
+                cmd.ALU_op <= ALU_plus;
+                cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA_from_alu;
+                -- lecture mem[PC] comme avec lui
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
+                -- next state
+                state_d <= S_Fetch;
+
             when S_ADDI =>
                 -- chaine de 20 bits de long en dupliquant le bit 31 de IR
                 -- concaténé avec les bits 31 à 20 de IR
@@ -306,6 +327,19 @@ begin
                 -- en complément à 2 de 12 bits IR
                 cmd.ALU_op <= ALU_plus;
                 cmd.ALU_Y_sel <= ALU_Y_immI;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA_from_alu;
+                -- lecture mem[PC] comme avec lui
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
+                -- next state
+                state_d <= S_Fetch;
+
+            when S_SUB =>
+                -- rd <- rs1 + rs2
+                cmd.ALU_op <= ALU_minus;
+                cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
                 cmd.RF_we <= '1';
                 cmd.Data_sel <= DATA_from_alu;
                 -- lecture mem[PC] comme avec lui
@@ -327,19 +361,6 @@ begin
                 --prochain état
                 state_d <= S_Fetch;
 
-            when S_ADD =>
-                -- rd <- rs1 + rs2
-                cmd.ALU_op <= ALU_plus;
-                cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
-                cmd.RF_we <= '1';
-                cmd.Data_sel <= DATA_from_alu;
-                -- lecture mem[PC] comme avec lui
-                cmd.ADDR_sel <= ADDR_from_pc;
-                cmd.mem_ce <= '1';
-                cmd.mem_we <= '0';
-                -- next state
-                state_d <= S_Fetch;
-            
             when S_AND =>
                 -- rd <- rs1 and rs2
                 cmd.LOGICAL_op <= LOGICAL_and;
