@@ -137,7 +137,7 @@ begin
                 cmd.IR_we <= '1';
                 -- on ne fait pas l'état decode, incrémentation apèrs coup dans l'état concerné
                 -- variables des bits de code op
-                last <= to_unsigned(status.IR(6 downto 0));
+                last <= status.IR(6 downto 0);
                 if last = "0010111" then -- code op auipc
                     -- on n'incrémente pas PC
                     state_d <= S_AUIPC;
@@ -148,9 +148,9 @@ begin
             when S_Decode =>
                 -- on ne fait pas cet état juste pour les branchements et auipc
                 -- variables des bits de code op
-                last <= to_unsigned(status.IR(6 downto 0));
-                mid <= to_unsigned(status.IR(14 downto 12));
-                first <= to_unsigned(status.IR(31 downto 25));
+                last <= status.IR(6 downto 0);
+                mid <= status.IR(14 downto 12);
+                first <= status.IR(31 downto 25);
                 -- on incrémente PC
                 cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                 cmd.PC_sel <= PC_from_pc;
