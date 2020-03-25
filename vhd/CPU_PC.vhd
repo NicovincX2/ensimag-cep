@@ -179,6 +179,14 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_AND;
+                elsif (status.IR(6 downto 0) = "0110011" and
+                    status.IR(14 downto 12) = "110" and
+                    status.IR(31 downto 25) = "0000000") then -- code op or
+                    -- on incrémente PC comme avec lui
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                    state_d <= S_OR;
                 else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
                 end if;
@@ -267,6 +275,18 @@ begin
             when S_AND =>
                 -- rd <- rs1 and rs2
                 cmd.LOGICAL_op <= LOGICAL_and;
+                cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA_from_logical;
+                -- lecture mem[PC] comme avec lui
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
+                -- next state
+                state_d <= S_Fetch;
+            when S_OR =>
+                -- rd <- rs1 and rs2
+                cmd.LOGICAL_op <= LOGICAL_or;
                 cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
                 cmd.RF_we <= '1';
                 cmd.Data_sel <= DATA_from_logical;
