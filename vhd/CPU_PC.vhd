@@ -187,6 +187,20 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_OR;
+                elsif (status.IR(6 downto 0) = "0010011" and
+                    status.IR(14 downto 12) = "110" then -- code op ori
+                    -- on incrémente PC comme avec lui
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                    state_d <= S_ORI;
+                elsif (status.IR(6 downto 0) = "0010011" and
+                    status.IR(14 downto 12) = "111" then -- code op andi
+                    -- on incrémente PC comme avec lui
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                    state_d <= S_ANDI;
                 else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
                 end if;
@@ -228,6 +242,32 @@ begin
                 cmd.mem_we <= '0';
                 -- next state
                 state_d <= S_Pre_Fetch;
+
+            when S_ORI =>
+                -- rd <- imm or rs1
+                cmd.LOGICAL_op <= LOGICAL_or;
+                cmd.ALU_Y_sel <= ALU_Y_immI;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA_from_logical;
+                -- lecture mem[PC] comme avec lui
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
+                -- next state
+                state_d <= S_Fetch;
+
+            when S_ANDI =>
+                -- rd <- imm and rs1
+                cmd.LOGICAL_op <= LOGICAL_and;
+                cmd.ALU_Y_sel <= ALU_Y_immI;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA_from_logical;
+                -- lecture mem[PC] comme avec lui
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
+                -- next state
+                state_d <= S_Fetch;
 
 ---------- Instructions arithmétiques et logiques ----------
 
@@ -284,8 +324,9 @@ begin
                 cmd.mem_we <= '0';
                 -- next state
                 state_d <= S_Fetch;
+
             when S_OR =>
-                -- rd <- rs1 and rs2
+                -- rd <- rs1 or rs2
                 cmd.LOGICAL_op <= LOGICAL_or;
                 cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
                 cmd.RF_we <= '1';
