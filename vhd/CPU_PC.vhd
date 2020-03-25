@@ -239,21 +239,21 @@ begin
                     cmd.PC_we <= '1';
                     state_d <= S_XOR;
                 elsif (status.IR(6 downto 0) = "0010011" and
-                    status.IR(14 downto 12) = "111" then -- code op andi
+                    status.IR(14 downto 12) = "111") then -- code op andi
                     -- on incrémente PC comme avec lui
                     cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_ANDI;
                 elsif (status.IR(6 downto 0) = "0010011" and
-                    status.IR(14 downto 12) = "110" then -- code op ori
+                    status.IR(14 downto 12) = "110") then -- code op ori
                     -- on incrémente PC comme avec lui
                     cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_ORI;
                 elsif (status.IR(6 downto 0) = "0010011" and
-                    status.IR(14 downto 12) = "100" then -- code op xori
+                    status.IR(14 downto 12) = "100") then -- code op xori
                     -- on incrémente PC comme avec lui
                     cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                     cmd.PC_sel <= PC_from_pc;
