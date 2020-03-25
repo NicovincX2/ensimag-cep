@@ -151,10 +151,6 @@ begin
                 last <= status.IR(6 downto 0);
                 mid <= status.IR(14 downto 12);
                 first <= status.IR(31 downto 25);
-                -- on incrémente PC
-                cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
-                cmd.PC_sel <= PC_from_pc;
-                cmd.PC_we <= '1';
                 -- case last is
                 --     when "0110111" =>
                 --         state_d <= S_LUI;
@@ -215,71 +211,135 @@ begin
                 --     state_d <= S_Error;
                 -- end if;
                 if last = "0110111" then -- code op lui
+                    -- on incrémente PC
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_LUI;
                 elsif (last = "0010011" and
                     mid = "000") then -- code op addi
                     -- on incrémente PC comme avec lui
+                    -- on incrémente PC
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_ADDI;
                 elsif (last = "0110011" and
                     mid = "001" and
                     first = "0000000") then -- code op sll
+                    -- on incrémente PC
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_SLL;
                 elsif (last = "0110011" and
                     mid = "101" and
                     first = "0000000") then -- code op srl
+                    -- on incrémente PC
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_SRL;
                 elsif (last = "0110011" and
                     mid = "101" and
                     first = "0100000") then -- code op sra
+                    -- on incrémente PC
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_SRA;
                 elsif (last = "0010011" and
                     mid = "001" and
                     first = "0000000") then -- code op slli
+                    -- on incrémente PC
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_SLLI;
                 elsif (last = "0010011" and
                     mid = "101" and
                     first = "0000000") then -- code op srli
+                    -- on incrémente PC
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_SRLI;
                 elsif (last = "0010011" and
                     mid = "101" and
                     first = "0100000") then -- code op srai
+                    -- on incrémente PC
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_SRAI;
                 elsif (last = "0110011" and
                     mid = "000" and
                     first = "0000000") then -- code op add
                     -- on incrémente PC comme avec lui
+                    -- on incrémente PC
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_ADD;
                 elsif (last = "0110011" and
                     mid = "000" and
                     first = "0100000") then -- code op sub
                     -- on incrémente PC comme avec lui
+                    -- on incrémente PC
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_SUB;
                 elsif (last = "0110011" and
                     mid = "111" and
                     first = "0000000") then -- code op and
                     -- on incrémente PC comme avec lui
+                    -- on incrémente PC
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_AND;
                 elsif (last = "0110011" and
                     mid = "110" and
                     first = "0000000") then -- code op or
                     -- on incrémente PC comme avec lui
+                    -- on incrémente PC
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_OR;
                 elsif (last = "0110011" and
                     mid = "100" and
                     first = "0000000") then -- code op xor
                     -- on incrémente PC comme avec lui
+                    -- on incrémente PC
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_XOR;
                 elsif (last = "0010011" and
                     mid = "111") then -- code op andi
                     -- on incrémente PC comme avec lui
+                    -- on incrémente PC
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_ANDI;
                 elsif (last = "0010011" and
                     mid = "110") then -- code op ori
                     -- on incrémente PC comme avec lui
+                    -- on incrémente PC
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_ORI;
                 elsif (last = "0010011" and
                     mid = "100") then -- code op xori
                     -- on incrémente PC comme avec lui
+                    -- on incrémente PC
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_XORI;
                 else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
