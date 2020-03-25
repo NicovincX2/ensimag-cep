@@ -136,6 +136,8 @@ begin
                 -- IR <- mem_datain
                 cmd.IR_we <= '1';
                 -- on ne fait pas l'état decode, incrémentation apèrs coup dans l'état concerné
+                -- variables des bits de code op
+                last <= status.IR(6 downto 0);
                 if last = "0010111" then -- code op auipc
                     -- on n'incrémente pas PC
                     state_d <= S_AUIPC;
@@ -198,7 +200,7 @@ begin
                                 elsif first = "0100000" then
                                     state_d <= S_SRA;
                                 end if;
-                            when mid = "110" =>
+                            when "110" =>
                                 if first = "0000000" then
                                     state_d <= S_OR;
                                 end if;
