@@ -178,6 +178,7 @@ begin
                                 state_d <= S_ORI;
                             when "111" =>
                                 state_d <= S_ANDI;
+                            when others => null;
                     when "0110011" =>
                         case mid is
                             when "000" =>
@@ -208,7 +209,9 @@ begin
                                 if first = "0000000" then
                                     state_d <= S_AND;
                                 end if;
+                            when others => null;
                         end case;
+                    when others => null;
                 end case;
                 -- on n'a pas changé d'état
                 if state_d = S_Decode then
