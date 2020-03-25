@@ -208,7 +208,7 @@ begin
                     state_d <= S_ADD;
                 elsif (status.IR(6 downto 0) = "0110011" and
                     status.IR(14 downto 12) = "000" and
-                    status.IR(31 downto 25) = "0100000") then -- code op add
+                    status.IR(31 downto 25) = "0100000") then -- code op sub
                     -- on incrémente PC comme avec lui
                     cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                     cmd.PC_sel <= PC_from_pc;
