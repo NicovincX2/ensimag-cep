@@ -34,7 +34,6 @@ architecture RTL of CPU_PC is
         S_ADD,
         S_SLL,
         S_AUIPC,
-        -- pas encore traités
         S_AND,
         S_OR,
         S_ORI,
