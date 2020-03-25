@@ -121,6 +121,7 @@ begin
             when S_Fetch =>
                 -- IR <- mem_datain
                 cmd.IR_we <= '1';
+                -- on ne fait pas l'état decode, incrémentation apèrs coup dans l'état concerné
                 if status.IR(6 downto 0) = "0010111" then -- code op auipc
                     -- on n'incrémente pas PC
                     state_d <= S_AUIPC;
