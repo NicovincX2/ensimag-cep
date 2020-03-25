@@ -32,7 +32,8 @@ architecture RTL of CPU_PC is
         S_LUI,
         S_ADDI,
         S_ADD,
-        S_SLL
+        S_SLL,
+        S_AUIPC
     );
 
     signal state_d, state_q : State_type;
@@ -152,6 +153,9 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_ADD;
+                elsif (status.IR(6 downto 0) = "0010111" then -- code op auipc
+                    -- on n'incrémente pas PC
+                    state_d <= S_AUIPC;
                 else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
                 end if;
@@ -214,6 +218,19 @@ begin
                 cmd.RF_we <= '1';
                 cmd.Data_sel <= DATA_from_alu;
                 -- lecture mem[PC] comme avec lui
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
+                -- next state
+                state_d <= S_Fetch;
+
+            when S_AUIPC =>
+                -- rd <- imm + pc
+                cmd.PC_X_sel <= PC_X_pc;
+                cmd.PC_Y_sel <= PC_Y_immU;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA_from_pc;
+                -- lecture mem[PC]
                 cmd.ADDR_sel <= ADDR_from_pc;
                 cmd.mem_ce <= '1';
                 cmd.mem_we <= '0';
