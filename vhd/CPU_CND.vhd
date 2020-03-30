@@ -17,20 +17,39 @@ entity CPU_CND is
 end entity;
 
 architecture RTL of CPU_CND is
-    signal extension_signe : std_logic;
-    signal z : std_logic;
-    signal s : std_logic;
+
+    component SUB32
+    port (X : in w32,
+          Y : in w32,
+          extension_signe : in std_logic,
+          z : out std_logic,
+          s : out std_logic);
+    end component;
+
+    signal extension_signe, z, s : std_logic;
+    signal X_eds, Y_eds, res : signed(32 downto 0);
+
 begin
 
     -- To extend an unsigned value, just stick a zero on the front: ('0' & a)
     -- To extend a signed value, you need to copy the existing sign bit: (b(N-1) & b)
     -- (where N is the length of B, so N = 8 in this case).
     -- The resulting code would be: result <= ('0' & a) + (b(7) & b);
-        
+
+    SOUSTRACTEUR : SUB32
+    port map (X => rs1;
+              Y => alu_y;
+              extension_signe => extension_signe;
+              z => z;
+              s => s);
+
     extension_signe <= (not(IR(12)) and not(IR(6))) or (IR(6) and not(IR(13)));
-    z <= ((rs1 - alu_y) & extension_signe) or not 0;
-    s <= ((rs1 - alu_y) & extension_signe)(31);
-    jcond <= (not(IR(14)) and (IR(12) xor z)) or ((s xor IR(12)) and IR(14));
+    X_eds <= X(31) & X when extension_signe = '1' else '0' & X;
+    Y_eds <= Y(31) & Y when extension_signe = '1' else '0' & Y;
+    res <= X_eds - Y_eds;
+    z <= (res = 0);
+    s <= (res(32) = 1);
     slt <= s;
+    jcond <= (not(IR(14)) and (IR(12) xor z)) or ((s xor IR(12)) and IR(14));
 
 end architecture;
