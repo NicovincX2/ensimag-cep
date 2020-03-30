@@ -1,3 +1,4 @@
+# TAG = chenillard_minimaliste
 .text
 # On place un index dans x1
 ori  x1, x0, 21
