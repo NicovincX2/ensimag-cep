@@ -7,13 +7,15 @@
 
 	auipc x31, 0          # Test chargement de PC = 0x1000
     auipc x31, 0          # Test chargement de PC = 0x1004
-	# auipc x31, 0xfeff7 # 0xfeff7000 + 0x1008 = 0x000fffff
-	auipc x31, 0xef459 # 0xef459000 + 0x1008 = 0x000f0461
+	auipc x31, 0xef459    # 0xef459000 + 0x1008 = 0xef45a008
+	auipc x31, 0xffffe    # 0xffffe000 + 0x100c = 0xfffff00c
+
+	# 0xfffff000 + 0x100c = 0x10000000C
 
 	# max_cycle 50
 	# pout_start
 	# 00001000
     # 00001004
 	# ef45a008
+	# fffff00c
 	# pout_end
-	# 000fffff
