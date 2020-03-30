@@ -18,7 +18,7 @@ end entity;
 
 architecture RTL of CPU_CND is
 
-    signal extension_signe : std_logic;
+    signal extension_signe, s_std_logic, z_std_logic : std_logic;
     signal z, s : boolean;
     signal X_eds, Y_eds, res : signed(32 downto 0);
 
