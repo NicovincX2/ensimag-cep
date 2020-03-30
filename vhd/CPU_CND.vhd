@@ -32,8 +32,8 @@ begin
     X_eds <= rs1(31) & rs1 when extension_signe = '1' else '0' & rs1;
     Y_eds <= alu_y(31) & alu_y when extension_signe = '1' else '0' & alu_y;
     res <= X_eds - Y_eds;
-    z <= (res = 0);
-    s <= (res(32) = 1);
+    z <= (res = '0');
+    s <= (res(32) = '1');
     slt <= s;
     jcond <= (not(IR(14)) and (IR(12) xor z)) or ((s xor IR(12)) and IR(14));
 
