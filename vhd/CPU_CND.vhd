@@ -18,14 +18,6 @@ end entity;
 
 architecture RTL of CPU_CND is
 
-    --component SUB32
-    --port (X : in w32,
-    --     Y : in w32,
-    --    extension_signe : in std_logic,
-    --   z : out std_logic,
-    --      s : out std_logic);
-    --end component;
-
     signal extension_signe, z, s : std_logic;
     signal X_eds, Y_eds, res : signed(32 downto 0);
 
@@ -36,16 +28,9 @@ begin
     -- (where N is the length of B, so N = 8 in this case).
     -- The resulting code would be: result <= ('0' & a) + (b(7) & b);
 
-    --SOUSTRACTEUR : SUB32
-    --port map (X => rs1;
-    --          Y => alu_y;
-    --         extension_signe => extension_signe;
-    --          z => z;
-    --          s => s);
-
     extension_signe <= (not(IR(12)) and not(IR(6))) or (IR(6) and not(IR(13)));
-    X_eds <= rs1(31) & rs1 when extension_signe = '1' else unsigned(0) & rs1;
-    Y_eds <= alu_y(31) & alu_y when extension_signe = '1' else unsigned(0) & alu_y;
+    X_eds <= rs1(31) & rs1 when extension_signe = '1' else 0 & rs1;
+    Y_eds <= alu_y(31) & alu_y when extension_signe = '1' else 0 & alu_y;
     res <= X_eds - Y_eds;
     z <= (res = 0);
     s <= (res(32) = 1);
