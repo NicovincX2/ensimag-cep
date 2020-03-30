@@ -11,14 +11,14 @@ entity CPU_CND is
         rs1         : in w32;
         alu_y       : in w32;
         IR          : in w32;
-        slt         : out std_logic;
-        jcond       : out std_logic
+        slt         : out boolean;
+        jcond       : out boolean
     );
 end entity;
 
 architecture RTL of CPU_CND is
 
-    signal extension_signe, z, s : std_logic;
+    signal extension_signe, z, s : boolean;
     signal X_eds, Y_eds, res : signed(32 downto 0);
 
 begin
