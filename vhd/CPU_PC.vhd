@@ -45,7 +45,9 @@ architecture RTL of CPU_PC is
         S_ANDI,
         S_ORI,
         S_XORI,
-        S_SUB
+        S_SUB,
+        S_BEQ,
+        S_SLT
     );
 
     signal state_d, state_q : State_type;
@@ -496,7 +498,8 @@ begin
                 state_d <= S_Fetch;
 
 ---------- Instructions de saut ----------
-
+            when S_BEQ =>
+                
 ---------- Instructions de chargement à partir de la mémoire ----------
 
 ---------- Instructions de sauvegarde en mémoire ----------
