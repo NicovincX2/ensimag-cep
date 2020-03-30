@@ -44,8 +44,8 @@ begin
     --          s => s);
 
     extension_signe <= (not(IR(12)) and not(IR(6))) or (IR(6) and not(IR(13)));
-    X_eds <= rs1(31) & rs1 when extension_signe = '1' else '0' & rs1;
-    Y_eds <= alu_y(31) & alu_y when extension_signe = '1' else '0' & alu_y;
+    X_eds <= rs1(31) & rs1 when extension_signe = '1' else unsigned(0) & rs1;
+    Y_eds <= alu_y(31) & alu_y when extension_signe = '1' else unsigned(0) & alu_y;
     res <= X_eds - Y_eds;
     z <= (res = 0);
     s <= (res(32) = 1);
