@@ -40,6 +40,6 @@ begin
     s_std_logic <= '1' when s else '0';
     --slt <= '1' when s else '0';
     slt <= s_std_logic;
-    jcond <= ((not(IR(14)) and (IR(12) xor z_std_logic)) or ((s_std_logic xor IR(12)) and IR(14)));
+    jcond <= ((not(IR(14)) and (IR(12) xor z_std_logic)) or ((IR(12) xor s_std_logic) and IR(14)));
 
 end architecture;
