@@ -133,14 +133,11 @@ begin
                 state_d      <= S_Fetch;
 
             when S_Fetch =>
-                -- IR <- mem_datain
+                -- IR <- mem_datain, disponible au prochain état
                 cmd.IR_we <= '1';
                 -- on ne fait pas l'état decode, incrémentation après coup dans l'état concerné
                 if status.IR(6 downto 0) = "0010111" then -- code op auipc
                     state_d <= S_AUIPC;
-                elsif (status.IR(6 downto 0) = "1100011" and
-                    status.IR(14 downto 12) = "000") then --code op beq
-                    state_d <= S_BEQ;
                 else
                     state_d <= S_Decode;
                 end if;
@@ -270,6 +267,11 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_SLT;
+                elsif (status.IR(6 downto 0) = "1100011" and
+                    status.IR(14 downto 12) = "000") then --code op beq
+                    -- on ne peut pas le mettre dans fetch comme pour auipc
+                    -- IR n'est disponible que mtn
+                    state_d <= S_BEQ;
                 else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
                 end if;
