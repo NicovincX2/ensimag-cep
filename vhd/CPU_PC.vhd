@@ -506,7 +506,6 @@ begin
             when S_BEQ =>
                 -- rs1 = rs2 --> pc <- pc + cst
                 cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
-                -- on suit le modèle de auipc
                 -- incrémentation de PC
                 if status.JCOND = true then
                     cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
