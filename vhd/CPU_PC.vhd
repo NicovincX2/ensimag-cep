@@ -137,7 +137,6 @@ begin
                 cmd.IR_we <= '1';
                 -- on ne fait pas l'état decode, incrémentation après coup dans l'état concerné
                 if status.IR(6 downto 0) = "0010111" then -- code op auipc
-                    -- on n'incrémente pas PC
                     state_d <= S_AUIPC;
                 elsif (status.IR(6 downto 0) = "1100011" and
                     status.IR(14 downto 12) = "000") then --code op beq
@@ -306,10 +305,10 @@ begin
                 cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                 cmd.PC_sel <= PC_from_pc;
                 cmd.PC_we <= '1';
-                -- lecture mem[PC]
-                cmd.ADDR_sel <= ADDR_from_pc;
-                cmd.mem_ce <= '1';
-                cmd.mem_we <= '0';
+                -- lecture mem[PC], fait dans Pre_Fetch
+                -- cmd.ADDR_sel <= ADDR_from_pc;
+                -- cmd.mem_ce <= '1';
+                -- cmd.mem_we <= '0';
                 -- next state
                 state_d <= S_Pre_Fetch;
 
@@ -515,16 +514,22 @@ begin
                 cmd.Data_sel <= DATA_from_slt;
                 -- on suit le modèle de auipc
                 -- incrémentation de PC
-                cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
-                cmd.PC_sel <= PC_from_pc;
-                cmd.PC_we <= '1';
-                -- lecture mem[PC]
-                cmd.ADDR_sel <= ADDR_from_pc;
-                cmd.mem_ce <= '1';
-                cmd.mem_we <= '0';
+                if status.JCOND then
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                else
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                -- lecture mem[PC], fait dans Pre_Fetch
+                -- cmd.ADDR_sel <= ADDR_from_pc;
+                -- cmd.mem_ce <= '1';
+                -- cmd.mem_we <= '0';
                 -- next state
-                state_d <= S_Fetch;
+                state_d <= S_Pre_Fetch;
 
+---------- Instructions de comparaison ----------
             when S_SLT =>
                 -- rs1 = rs2 --> pc <- pc + cst
                 cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
