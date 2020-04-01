@@ -135,10 +135,13 @@ begin
             when S_Fetch =>
                 -- IR <- mem_datain
                 cmd.IR_we <= '1';
-                -- on ne fait pas l'état decode, incrémentation apèrs coup dans l'état concerné
+                -- on ne fait pas l'état decode, incrémentation après coup dans l'état concerné
                 if status.IR(6 downto 0) = "0010111" then -- code op auipc
                     -- on n'incrémente pas PC
                     state_d <= S_AUIPC;
+                elsif (status.IR(6 downto 0) = "1100011" and
+                    status.IR(14 downto 12) = "000") then --code op beq
+                    state_d <= S_BEQ;
                 else
                     state_d <= S_Decode;
                 end if;
@@ -499,6 +502,21 @@ begin
 
 ---------- Instructions de saut ----------
             when S_BEQ =>
+                -- rs1 = rs2 --> pc <- pc + cst
+                cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA_from_slt;
+                -- on suit le modèle de auipc
+                -- incrémentation de PC
+                cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
+                cmd.PC_sel <= PC_from_pc;
+                cmd.PC_we <= '1';
+                -- lecture mem[PC]
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
+                -- next state
+                state_d <= S_Pre_Fetch;
                 
 ---------- Instructions de chargement à partir de la mémoire ----------
 
