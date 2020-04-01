@@ -666,7 +666,7 @@ begin
                 state_d <= S_Fetch;
 
             when S_SLTI =>
-                cmd.ALU_Y_sel <= ALU_Y_rf_immI;
+                cmd.ALU_Y_sel <= ALU_Y_immI;
                 cmd.RF_we <= '1';
                 cmd.Data_sel <= DATA_from_slt;
                 -- lecture mem[PC]
@@ -688,7 +688,7 @@ begin
                 state_d <= S_Fetch;
 
             when S_SLTIU =>
-                cmd.ALU_Y_sel <= ALU_Y_rf_immI;
+                cmd.ALU_Y_sel <= ALU_Y_immI;
                 cmd.RF_we <= '1';
                 cmd.Data_sel <= DATA_from_slt;
                 -- lecture mem[PC]
