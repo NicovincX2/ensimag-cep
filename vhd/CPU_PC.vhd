@@ -46,11 +46,13 @@ architecture RTL of CPU_PC is
         S_ORI,
         S_XORI,
         S_SUB,
-        S_BRS; -- beq, bge, bgeu, blt, bltu, bne
-        S_SLTRS; -- slt, sltu
-        S_SLTIMM; -- slti, sltiu
+        S_BRS,
+        S_SLTRS,
+        S_SLTIMM,
     );
-
+    -- S_BRS : beq, bge, bgeu, blt, bltu, bne
+    -- S_SLTRS : slt, sltu
+    -- S_SLTIMM : slti, sltiu
     signal state_d, state_q : State_type;
 
 
