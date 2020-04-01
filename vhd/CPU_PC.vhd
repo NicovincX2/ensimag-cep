@@ -512,17 +512,15 @@ begin
                     cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
+                    -- next state
+                    state_d <= S_Pre_Fetch;
                 else
                     cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
+                    -- next state
+                    state_d <= S_Fetch;
                 end if;
-                -- lecture mem[PC], fait dans Pre_Fetch
-                -- cmd.ADDR_sel <= ADDR_from_pc;
-                -- cmd.mem_ce <= '1';
-                -- cmd.mem_we <= '0';
-                -- next state
-                state_d <= S_Pre_Fetch;
 
 ---------- Instructions de comparaison ----------
             when S_SLT =>
