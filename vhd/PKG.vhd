@@ -207,6 +207,7 @@ package PKG is
     type PO_status is record
         IR    : w32;
         JCOND : boolean;
+        SLT   : boolean;
         -- Compléter pour les interruptions :
         IT    : boolean;
     end record;
