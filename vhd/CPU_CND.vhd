@@ -33,7 +33,7 @@ begin
     -- X_eds <= rs1(31) & rs1 when extension_signe = '1' else '0' & rs1;
     -- Y_eds <= alu_y(31) & alu_y when extension_signe = '1' else '0' & alu_y;
     -- res <= X_eds - Y_eds;
-    res <= (rs1(31) & rs1) - (alu_y(31) & alu_y)
+    res <= (rs1(31) & rs1) - (alu_y(31) & alu_y);
     z <= (res = 0);
     s <= (extension_signe = '1' and res(32) = '1') or (extension_signe = '0' and (rs1 < alu_y));
     z_std_logic <= '1' when z else '0';
