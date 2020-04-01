@@ -305,10 +305,6 @@ begin
                 cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                 cmd.PC_sel <= PC_from_pc;
                 cmd.PC_we <= '1';
-                -- lecture mem[PC], fait dans Pre_Fetch
-                -- cmd.ADDR_sel <= ADDR_from_pc;
-                -- cmd.mem_ce <= '1';
-                -- cmd.mem_we <= '0';
                 -- next state
                 state_d <= S_Pre_Fetch;
 
@@ -510,11 +506,9 @@ begin
             when S_BEQ =>
                 -- rs1 = rs2 --> pc <- pc + cst
                 cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
-                -- cmd.RF_we <= '1';
-                -- cmd.Data_sel <= DATA_from_slt;
                 -- on suit le modèle de auipc
                 -- incrémentation de PC
-                if status.JCOND then
+                if status.JCOND = true then
                     cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
