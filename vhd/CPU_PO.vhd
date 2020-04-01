@@ -369,6 +369,7 @@ begin
     );
 
     status.JCOND <= JMP = '1';
+    status.SLT <= SLT = '1';
 
     CND :  CPU_CND
         generic map (
