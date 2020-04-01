@@ -577,7 +577,7 @@ begin
                 -- signed rs1 >= rs2 --> pc <- pc + cst
                 cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
                 -- incrémentation de PC
-                if status.JCOND or not status.SLT then
+                if status.JCOND then
                     cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
@@ -593,7 +593,7 @@ begin
                 -- unsigned rs1 >= rs2 --> pc <- pc + cst
                 cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
                 -- incrémentation de PC
-                if status.JCOND or not status.SLT then
+                if status.JCOND then
                     cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
@@ -609,7 +609,7 @@ begin
                 -- signed rs1 < rs2 --> pc <- pc + cst
                 cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
                 -- incrémentation de PC
-                if status.SLT then
+                if status.JCOND then
                     cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
@@ -625,7 +625,7 @@ begin
                 -- signed rs1 < rs2 --> pc <- pc + cst
                 cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
                 -- incrémentation de PC
-                if status.SLT then
+                if status.JCOND then
                     cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
