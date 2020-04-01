@@ -641,7 +641,7 @@ begin
                 -- rs1 != rs2 --> pc <- pc + cst
                 cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
                 -- incrémentation de PC
-                if (status.SLT or not status.SLT) and not status.JCOND then
+                if not status.JCOND then
                     cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
