@@ -34,8 +34,8 @@ begin
     alu_y_eds <= alu_y(31) & alu_y when extension_signe = '1' else '0' & alu_y;
     res <= rs1_eds - alu_y_eds;
 
-    z_std_logic <= '1' when (res = 0) else '0';
-    s_std_logic <= '1' when (res(32) = '1') else '0';
+    z_std_logic <= '1' when (res = 0) else '0'; -- z vaut 1 lsq rs1 = alu_y
+    s_std_logic <= '1' when (res(32) = '1') else '0'; -- s vaut 1 lsq rs1 < (alu_y = rs2)
  
     slt <= s_std_logic;
     jcond <= (not(IR(14)) and (z_std_logic xor IR(12))) or (IR(14) and (s_std_logic xor IR(12)));

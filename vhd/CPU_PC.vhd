@@ -47,7 +47,15 @@ architecture RTL of CPU_PC is
         S_XORI,
         S_SUB,
         S_BEQ,
-        S_SLT
+        S_BNE,
+        S_BLT,
+        S_BGE,
+        S_BLTU,
+        S_BGEU,
+        S_SLT,
+        S_SLTI,
+        S_SLTU,
+        S_SLTIU
     );
 
     signal state_d, state_q : State_type;
@@ -267,11 +275,55 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_SLT;
+                elsif (status.IR(6 downto 0) = "0110011" and
+                    status.IR(14 downto 12) = "011" and
+                    status.IR(31 downto 25) = "0000000") then --code op sltu
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                    state_d <= S_SLTU;
+                elsif (status.IR(6 downto 0) = "0010011" and
+                    status.IR(14 downto 12) = "010") then --code op slti
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                    state_d <= S_SLTI;
+                elsif (status.IR(6 downto 0) = "0010011" and
+                    status.IR(14 downto 12) = "011") then --code op sltiu
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                    state_d <= S_SLTIU;
                 elsif (status.IR(6 downto 0) = "1100011" and
                     status.IR(14 downto 12) = "000") then --code op beq
                     -- on ne peut pas le mettre dans fetch comme pour auipc
                     -- IR n'est disponible que mtn
                     state_d <= S_BEQ;
+                elsif (status.IR(6 downto 0) = "1100011" and
+                    status.IR(14 downto 12) = "001") then --code op bne
+                    -- on ne peut pas le mettre dans fetch comme pour auipc
+                    -- IR n'est disponible que mtn
+                    state_d <= S_BNE;
+                elsif (status.IR(6 downto 0) = "1100011" and
+                    status.IR(14 downto 12) = "100") then --code op blt
+                    -- on ne peut pas le mettre dans fetch comme pour auipc
+                    -- IR n'est disponible que mtn
+                    state_d <= S_BLT;
+                elsif (status.IR(6 downto 0) = "1100011" and
+                    status.IR(14 downto 12) = "101") then --code op bge
+                    -- on ne peut pas le mettre dans fetch comme pour auipc
+                    -- IR n'est disponible que mtn
+                    state_d <= S_BGE;
+                elsif (status.IR(6 downto 0) = "1100011" and
+                    status.IR(14 downto 12) = "110") then --code op bltu
+                    -- on ne peut pas le mettre dans fetch comme pour auipc
+                    -- IR n'est disponible que mtn
+                    state_d <= S_BLTU;
+                elsif (status.IR(6 downto 0) = "1100011" and
+                    status.IR(14 downto 12) = "111") then --code op bgeu
+                    -- on ne peut pas le mettre dans fetch comme pour auipc
+                    -- IR n'est disponible que mtn
+                    state_d <= S_BGEU;
                 else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
                 end if;
@@ -521,10 +573,122 @@ begin
                 -- next state
                 state_d <= S_Pre_Fetch;
 
+            when S_BGE =>
+                -- signed rs1 >= rs2 --> pc <- pc + cst
+                cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+                -- incrémentation de PC
+                if status.JCOND or not status.SLT then
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                else
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                end if;
+                -- next state
+                state_d <= S_Pre_Fetch;
+
+            when S_BGEU =>
+                -- unsigned rs1 >= rs2 --> pc <- pc + cst
+                cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+                -- incrémentation de PC
+                if status.JCOND or not status.SLT then
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                else
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                end if;
+                -- next state
+                state_d <= S_Pre_Fetch;
+
+            when S_BLT =>
+                -- signed rs1 < rs2 --> pc <- pc + cst
+                cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+                -- incrémentation de PC
+                if status.SLT then
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                else
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                end if;
+                -- next state
+                state_d <= S_Pre_Fetch;
+
+            when S_BLTU =>
+                -- signed rs1 < rs2 --> pc <- pc + cst
+                cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+                -- incrémentation de PC
+                if status.SLT then
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                else
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                end if;
+                -- next state
+                state_d <= S_Pre_Fetch;
+
+            when S_BNE =>
+                -- rs1 != rs2 --> pc <- pc + cst
+                cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+                -- incrémentation de PC
+                if not status.JCOND then
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                else
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                end if;
+                -- next state
+                state_d <= S_Pre_Fetch;
+
 ---------- Instructions de comparaison ----------
             when S_SLT =>
-                -- rs1 = rs2 --> pc <- pc + cst
                 cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA_from_slt;
+                -- lecture mem[PC]
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
+                -- next state
+                state_d <= S_Fetch;
+
+            when S_SLTI =>
+                cmd.ALU_Y_sel <= ALU_Y_rf_immI;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA_from_slt;
+                -- lecture mem[PC]
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
+                -- next state
+                state_d <= S_Fetch;
+
+            when S_SLTU =>
+                cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA_from_slt;
+                -- lecture mem[PC]
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
+                -- next state
+                state_d <= S_Fetch;
+
+            when S_SLTIU =>
+                cmd.ALU_Y_sel <= ALU_Y_rf_immI;
                 cmd.RF_we <= '1';
                 cmd.Data_sel <= DATA_from_slt;
                 -- lecture mem[PC]
