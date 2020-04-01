@@ -513,7 +513,7 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     -- next state
-                    state_d <= S_Pre_Fetch;
+                    state_d <= S_Fetch;
                 else
                     cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                     cmd.PC_sel <= PC_from_pc;
