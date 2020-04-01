@@ -264,6 +264,13 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_XORI;
+                elsif (status.IR(6 downto 0) = "0110011" and
+                    status.IR(14 downto 12) = "010" and
+                    status.IR(31 downto 25) = "0000000") then --code op slt
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                    state_d <= S_SLT;
                 else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
                 end if;
@@ -517,6 +524,18 @@ begin
                 cmd.mem_we <= '0';
                 -- next state
                 state_d <= S_Pre_Fetch;
+
+            when S_SLT =>
+                -- rs1 = rs2 --> pc <- pc + cst
+                cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+                cmd.RF_we <= '1';
+                cmd.Data_sel <= DATA_from_slt;
+                -- lecture mem[PC]
+                cmd.ADDR_sel <= ADDR_from_pc;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
+                -- next state
+                state_d <= S_Fetch;
                 
 ---------- Instructions de chargement à partir de la mémoire ----------
 
