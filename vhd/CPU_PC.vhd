@@ -48,7 +48,7 @@ architecture RTL of CPU_PC is
         S_SUB,
         S_BRS,
         S_SLTRS,
-        S_SLTIMM,
+        S_SLTIMM
     );
     -- S_BRS : beq, bge, bgeu, blt, bltu, bne
     -- S_SLTRS : slt, sltu
