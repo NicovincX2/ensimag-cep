@@ -510,8 +510,8 @@ begin
             when S_BEQ =>
                 -- rs1 = rs2 --> pc <- pc + cst
                 cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
-                cmd.RF_we <= '1';
-                cmd.Data_sel <= DATA_from_slt;
+                -- cmd.RF_we <= '1';
+                -- cmd.Data_sel <= DATA_from_slt;
                 -- on suit le modèle de auipc
                 -- incrémentation de PC
                 if status.JCOND then
