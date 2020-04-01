@@ -523,7 +523,7 @@ begin
                 cmd.mem_ce <= '1';
                 cmd.mem_we <= '0';
                 -- next state
-                state_d <= S_Pre_Fetch;
+                state_d <= S_Fetch;
 
             when S_SLT =>
                 -- rs1 = rs2 --> pc <- pc + cst
