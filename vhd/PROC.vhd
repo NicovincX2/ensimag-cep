@@ -381,7 +381,7 @@ begin
 
     push_tmp  <= X"000" & "0" & push & X"000" & switch;
     push_or   <= push(0) or push(1) or push(2);
-    previous_push_or <= bus_datai(2)(7) or bus_datai(2)(8) or bus_datai(2)(9);
+    previous_push_or <= bus_datai(2)(16) or bus_datai(2)(17) or bus_datai(2)(18);
     pppp <= push_or and not previous_push_or;
 
     C_PLIC: IP_PLIC

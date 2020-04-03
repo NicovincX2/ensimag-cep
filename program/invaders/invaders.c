@@ -12,6 +12,14 @@
  * definition of macros
  * ---------------------------------------------------------------------------
  */
+/* Do not use default config in cep_platform.h */
+#if 1
+#undef DISPLAY_WIDTH
+#undef DISPLAY_HEIGHT
+
+#define DISPLAY_WIDTH  1920     /* display width resolution */
+#define DISPLAY_HEIGHT 1080     /* display height resolution */
+#endif
 #define N_OBJECTS 7             /* displayed objects (aliens, laser, spaceship) */
 
 // #SCALING
@@ -140,10 +148,12 @@ int main(void)
    laser = &object[1];         /* laser is the second declared object */
    spaceship = &object[0];     /* spaceship is the first declared object */
 #if DISPLAY_HEIGHT == 720
+   *(volatile uint32_t*)FRAME_BUFFER_CTRL_MODE_REG = HDMI_MODE_720p_60Hz;
    spaceship->x = 20;          /* set spaceship at the middle */
    spaceship->y = 21;          /* and bottom of the screen */
 #define MAX_X 39
 #elif DISPLAY_HEIGHT == 1080
+   *(volatile uint32_t*)FRAME_BUFFER_CTRL_MODE_REG = HDMI_MODE_1080p_60Hz;
    spaceship->x = 29;          /* set spaceship at the middle */
    spaceship->y = 31;          /* and bottom of the screen */
 #define MAX_X 58

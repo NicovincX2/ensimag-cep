@@ -16,7 +16,7 @@ do
         file_list=""
         for file in $2
         do
-            test_tag=$(awk 'BEGIN{IGNORECASE=1} /# *TAG *= *([^\n]*)/{print gensub(/.*# *TAG *= *([^ ]+)/, "\\1", "g")}' $file)
+            test_tag=$(awk 'BEGIN{IGNORECASE=1} /# *TAG *= *([^\r\n]*)/{print gensub(/.*# *TAG *= *([^ ]+) *\r*/, "\\1", "g")}' $file)
             if [[ ${test_tag^^} == ${tag} ]] ; then
                 l="$l $file"
                 test="^$(basename ${file} .s)$"

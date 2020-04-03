@@ -113,7 +113,11 @@ begin
                         we_1 <= we;
                     when RF_SIZE_byte =>
                         we_0 <= we;
-                    when others => null;
+                    when others => 
+			we_0 <= we;
+                        we_1 <= we;
+                        we_2 <= we;
+                        we_3 <= we;
                 end case;
             else
                 if size = RF_SIZE_byte then

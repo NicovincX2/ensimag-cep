@@ -118,7 +118,6 @@ package PKG is
 
     type CSR_select is (
         CSR_from_mcause,
-        CSR_from_mtval,
         CSR_from_mip,
         CSR_from_mie,
         CSR_from_mstatus,
@@ -142,9 +141,6 @@ package PKG is
 
     type CSR_write_enable is (
         CSR_none,
-        CSR_mcause,
-        CSR_mtval,
-        CSR_mip,
         CSR_mie,
         CSR_mstatus,
         CSR_mtvec,
@@ -169,8 +165,6 @@ package PKG is
 
     -- Commandes vers la PO globale
     type PO_cmd is record
-        rst                 : std_logic;
-
         ALU_op              : ALU_op_type;
         LOGICAL_op          : LOGICAL_op_type;
         ALU_Y_sel           : ALU_Y_select;
