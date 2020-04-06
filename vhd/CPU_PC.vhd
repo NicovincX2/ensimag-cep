@@ -620,7 +620,6 @@ begin
 				state_d <= S_WR_LW;
 
 			when S_WR_LW =>
-				cmd.IR_we <= '0';
 				cmd.RF_SIGN_enable <= '1';
 				cmd.RF_SIZE_sel <= RF_SIZE_word;
 				cmd.RF_we <= '1';
