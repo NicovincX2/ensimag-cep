@@ -621,16 +621,16 @@ begin
 
 			when S_WR_LW =>
 				cmd.IR_we <= '0';
-				cmd.RF_SIGN_enable <= '0';
+				cmd.RF_SIGN_enable <= '1';
 				cmd.RF_SIZE_sel <= RF_SIZE_word;
 				cmd.RF_we <= '1';
 				cmd.Data_sel <= DATA_from_mem;
-				--lecture mem[PC]
-				cmd.ADDR_sel <= ADDR_from_pc;
-				cmd.mem_ce <= '1';
-				cmd.mem_we <= '0';
-				--next state
-				state_d <= S_Fetch;
+                --Incrémentation de PC
+                cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                cmd.PC_sel <= PC_from_pc;
+                cmd.PC_we <= '1';
+                --next state
+				state_d <= S_Pre_Fetch;
 ---------- Instructions de sauvegarde en mémoire ----------
 
 ---------- Instructions d'accès aux CSR ----------
