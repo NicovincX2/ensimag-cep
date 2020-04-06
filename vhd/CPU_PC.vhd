@@ -48,11 +48,15 @@ architecture RTL of CPU_PC is
         S_SUB,
         S_BRS,
         S_SLTRS,
-        S_SLTIMM
+        S_SLTIMM,
+		S_RE_LW,
+		S_WR_LW
     );
     -- S_BRS : beq, bge, bgeu, blt, bltu, bne
     -- S_SLTRS : slt, sltu
     -- S_SLTIMM : slti, sltiu
+	-- S_RE_LW : lecture adresse mémoire
+	-- S_WR_LW : chargement registre
     signal state_d, state_q : State_type;
 
 
@@ -319,7 +323,11 @@ begin
                     -- on ne peut pas le mettre dans fetch comme pour auipc
                     -- IR n'est disponible que mtn
                     state_d <= S_BRS;
-                else
+				elsif (status.IR(6 downto 0) = "0000011" and
+					-- lw
+					status.IR(14 downto 12) = "010") then
+					state_d <= S_RE_LW;
+				else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
                 end if;
 
@@ -590,9 +598,30 @@ begin
                 cmd.mem_we <= '0';
                 -- next state
                 state_d <= S_Fetch;
-                
----------- Instructions de chargement à partir de la mémoire ----------
 
+---------- Instructions de chargement à partir de la mémoire ----------
+			when S_RE_LW =>
+				--lw rd, imm(rs1)
+				cmd.mem_ce <= '1';
+				cmd.mem_we <= '0';
+				cmd.AD_we <= '1';
+				cmd.AD_Y_sel <= AD_Y_immI;
+				cmd.RF_we <= '0';
+				--next state
+				state_d <= S_WR_LW;
+
+			when S_WR_LW =>
+				cmd.IR_we <= '0';
+				cmd.RF_SIGN_enable <= true;
+				cmd.RF_SIZE_sel <= RF_SIZE_word;
+				cmd.RF_we <= '1';
+				cmd.Data_sel <= DATA_from_mem;
+				--lecture mem[PC]
+				cmd.ADDR_sel <= ADDR_from_pc;
+				cmd.mem_ce <= '1';
+				cmd.mem_we <= '0';
+				--next state
+				state_d <= S_Fetch;
 ---------- Instructions de sauvegarde en mémoire ----------
 
 ---------- Instructions d'accès aux CSR ----------
