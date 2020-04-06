@@ -621,7 +621,7 @@ begin
 
 			when S_WR_LW =>
 				cmd.IR_we <= '0';
-				cmd.RF_SIGN_enable <= '1';
+				cmd.RF_SIGN_enable <= '0';
 				cmd.RF_SIZE_sel <= RF_SIZE_word;
 				cmd.RF_we <= '1';
 				cmd.Data_sel <= DATA_from_mem;
