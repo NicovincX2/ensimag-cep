@@ -607,7 +607,8 @@ begin
 				cmd.AD_we <= '1';
 				cmd.AD_Y_sel <= AD_Y_immI;
 				cmd.RF_we <= '0';
-				--next state
+                cmd.ADDR_sel <= ADDR_from_ad;
+                --next state
 				state_d <= S_WR_LW;
 
 			when S_WR_LW =>
