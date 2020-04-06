@@ -49,8 +49,9 @@ architecture RTL of CPU_PC is
         S_BRS,
         S_SLTRS,
         S_SLTIMM,
+		S_ADD_LW,
 		S_RE_LW,
-		S_WR_LW
+        S_WR_LW
     );
     -- S_BRS : beq, bge, bgeu, blt, bltu, bne
     -- S_SLTRS : slt, sltu
@@ -600,12 +601,19 @@ begin
                 state_d <= S_Fetch;
 
 ---------- Instructions de chargement à partir de la mémoire ----------
-			when S_RE_LW =>
+            when S_ADD_LW =>
+                cmd.mem_ce <= '0';
+                cmd.mem_we <= '0';
+                cmd.AD_we <= '1';
+                cmd.RF_we <= '0';
+                cmd.AD_Y_sel <= AD_Y_immI;
+                state_d <= S_RE_LW;
+
+            when S_RE_LW =>
 				--lw rd, imm(rs1)
 				cmd.mem_ce <= '1';
 				cmd.mem_we <= '0';
-				cmd.AD_we <= '1';
-				cmd.AD_Y_sel <= AD_Y_immI;
+				cmd.AD_we <= '0';
 				cmd.RF_we <= '0';
                 cmd.ADDR_sel <= ADDR_from_ad;
                 --next state
