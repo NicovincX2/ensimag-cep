@@ -27,17 +27,17 @@
 
     # Groupement 3
     li x1, 0x00000000
-    sltiu x31, x1, 0x7ff
+    sltiu x31, x1, 0xfffff7ff
 
     li x1, 0x7fffffff
     sltiu x31, x1, 0x000
 
     li x1, 0x7fffffff
-    sltiu x31, x1, 0x7ff
+    sltiu x31, x1, 0xfffff7ff
 
     # Groupement 4
     li x1, 0x80000000
-    sltiu x31, x1, 0x7ff
+    sltiu x31, x1, 0xfffff7ff
 
     li x1, 0x7fffffff
     sltiu x31, x1, 0xfffff800
