@@ -2,13 +2,13 @@
     .text
 
     # Groupement 1
-    li x1, 0xff00ff00
+    li x1, 0x00ff0f00
     xori x31, x1, 0xffffff0f
 
     li x1, 0x0ff00ff0
     xori x31, x1, 0x0f0
 
-    li x1, 0x00ff00ff
+    li x1, 0x00ff08ff
     xori x31, x1, 0x70f
 
     li x1, 0xf00ff00f
@@ -18,7 +18,7 @@
     xori x31, zero, 0x0f0
 
     li x1, 0x00ff00ff
-    xori x0, x1, 0x70f  # limitation de x31
+    xori x0, x1, 0x70f  # mv x31, x0
 
     # TODO : 
     # source/destination tests
