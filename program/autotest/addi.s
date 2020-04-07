@@ -10,10 +10,63 @@
 	addi x31, zero, 2047    # li x31, 0x7F
 	# addi x31, zero, 2048    # li x31, 0x800 fail car range -2048 à 2047
 
-	# max_cycle 50
+    # Groupement 1
+    li x1, 0x00000000
+    addi x31, x1, 0x800
+
+    li x1, 0x80000000
+    addi x31, x1, 0x000
+
+    li x1, 0x80000000
+    addi x31, x1, 0x800
+
+    # Groupement 2
+    li x1, 0x00000000
+    addi x31, x1, 0x7ff
+
+    li x1, 0x7fffffff
+    addi x31, x1, 0x000
+
+    li x1, 0x7fffffff
+    addi x31, x1, 0x7ff
+
+    # Groupement 3
+    li x1, 0x80000000
+    addi x31, x1, 0x7ff
+
+    li x1, 0x7fffffff
+    addi x31, x1, 0x800
+
+    # Groupement 4
+    li x1, 0x00000000
+    addi x31, x1, 0xfff
+
+    li x1, 0xffffffff
+    addi x31, x1, 0x001
+
+    li x1, 0xffffffff
+    addi x31, x1, 0xfff
+
+    # Groupement 5
+    li x1, 0x7fffffff
+    addi x31, x1, 0x001
+
+	# max_cycle 100
 	# pout_start
     # 00000000
     # FFFFFFFF
     # FFFFF800
     # 000007FF
+    # fffff800
+    # 80000000
+    # 7ffff800
+    # 000007ff
+    # 7fffffff
+    # 800007fe
+    # 800007ff
+    # 7ffff7ff
+    # ffffffff
+    # 00000000
+    # fffffffe
+    # 80000000
 	# pout_end
