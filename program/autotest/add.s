@@ -36,14 +36,14 @@
     li x2, 0x80000000
     add x31, x1, x2
 
-    # # Groupement 2
-    # li x1, 0x00007fff 
-    # li x2, 0x00000000
-    # add x31, x1, x2
+    # Groupement 2
+    li x1, 0x00007fff 
+    li x2, 0x00000000
+    add x31, x1, x2
 
-    # li x1, 0x7fffffff
-    # li x2, 0x7fffffff
-    # add x31, x1, x2
+    li x1, 0x7fffffff
+    li x2, 0x7fffffff
+    add x31, x1, x2
 
     # li x1, 0x80007ffe
     # li x2, 0x7fffffff
@@ -90,10 +90,10 @@
     # ffff8000
     # 00000000
     # ffff8000
+    # 00007fff
+    # fffffffe
 	# pout_end
 
-    # 00007fff
-    # 00000000
     # 00007fff
     # 00007fff
     # ffff8000
