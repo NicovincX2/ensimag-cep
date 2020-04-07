@@ -1,62 +1,62 @@
-# TAG = slti
+# TAG = sltiu
     .text
 
     # Toujours plus de tests...
     # Groupement 1
     li x1, 0x00000000
-    slti x31, x1, 0x000
+    sltiu x31, x1, 0x000
 
     li x1, 0x00000001
-    slti x31, x1, 0x001
+    sltiu x31, x1, 0x001
 
     li x1, 0x00000003
-    slti x31, x1, 0x007
+    sltiu x31, x1, 0x007
 
     li x1, 0x00000007
-    slti x31, x1, 0x003
+    sltiu x31, x1, 0x003
 
     # Groupement 2
     li x1, 0x00000000
-    slti x31, x1, 0xfffff800
+    sltiu x31, x1, 0xfffff800
 
     li x1, 0x80000000
-    slti x31, x1, 0x000
+    sltiu x31, x1, 0x000
 
     li x1, 0x80000000
-    slti x31, x1, 0xfffff800
+    sltiu x31, x1, 0xfffff800
 
     # Groupement 3
     li x1, 0x00000000
-    slti x31, x1, 0x7ff
+    sltiu x31, x1, 0x7ff
 
     li x1, 0x7fffffff
-    slti x31, x1, 0x000
+    sltiu x31, x1, 0x000
 
     li x1, 0x7fffffff
-    slti x31, x1, 0x7ff
+    sltiu x31, x1, 0x7ff
 
     # Groupement 4
     li x1, 0x80000000
-    slti x31, x1, 0x7ff
+    sltiu x31, x1, 0x7ff
 
     li x1, 0x7fffffff
-    slti x31, x1, 0xfffff800
+    sltiu x31, x1, 0xfffff800
 
     # Groupement 5
     li x1, 0x00000000
-    slti x31, x1, 0xffffffff
+    sltiu x31, x1, 0xffffffff
 
     li x1, 0xffffffff
-    slti x31, x1, 0x001
+    sltiu x31, x1, 0x001
 
     li x1, 0xffffffff
-    slti x31, x1, 0xffffffff
+    sltiu x31, x1, 0xffffffff
 
     # Groupement 6
-    slti x31, x0, 0xffffffff
+    sltiu x31, x0, 0xffffffff
 
     li x1, 0x00ff00ff
-    slti x0, x1, 0xffffffff  # mv x31, x0
+    sltiu x0, x1, 0xffffffff  # mv x31, x0
 
 	# max_cycle 300
 	# pout_start
