@@ -12,13 +12,13 @@
 
     # Groupement 1
     li x1, 0x00000000
-    addi x31, x1, 0x8000000
+    addi x31, x1, 0xffff800
 
     li x1, 0x80000000
     addi x31, x1, 0x000
 
     li x1, 0x80000000
-    addi x31, x1, 0x800
+    addi x31, x1, 0xfffff800
 
     # Groupement 2
     li x1, 0x00000000
@@ -35,17 +35,17 @@
     addi x31, x1, 0x7ff
 
     li x1, 0x7fffffff
-    addi x31, x1, 0x800
+    addi x31, x1, 0xfffff800
 
     # Groupement 4
     li x1, 0x00000000
-    addi x31, x1, 0xfff
+    addi x31, x1, 0xffffffff
 
     li x1, 0xffffffff
     addi x31, x1, 0x001
 
     li x1, 0xffffffff
-    addi x31, x1, 0xfff
+    addi x31, x1, 0xffffffff
 
     # Groupement 5
     li x1, 0x7fffffff
