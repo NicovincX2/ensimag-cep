@@ -26,9 +26,9 @@
 
 	# max_cycle 100
 	# pout_start
-    # f00ff00f
-    # ff00ff00
-    # 0ff00ff0
+    # ff00f00f
+    # 0ff00f00
+    # 00ff0ff0
     # f00ff0ff
     # 000000f0
     # pout_end
