@@ -22,7 +22,7 @@
     addi x2, x0, 1
     add x31, x1, x2
 
-    # On passe en hexa avec lui et d'autres cas limites
+    # On passe en hexa avec lui et d'autres (mais aussi les mêmes...) cas limites
     # Groupement 1
     li x1, 0xffff8000 
     li x2, 0x00000000
@@ -49,32 +49,32 @@
     li x2, 0x7fffffff
     add x31, x1, x2
 
-    # Groupement 3
-    li x1, 0x80007fff 
-    li x2, 0x80000000
-    add x31, x1, x2
+    # # Groupement 3
+    # li x1, 0x80007fff 
+    # li x2, 0x80000000
+    # add x31, x1, x2
 
-    li x1, 0x7fff7fff
-    li x2, 0x7fffffff
-    add x31, x1, x2
+    # li x1, 0x7fff7fff
+    # li x2, 0x7fffffff
+    # add x31, x1, x2
 
-    # Groupement 4
-    li x1, 0xffffffff 
-    li x2, 0x00000000
-    add x31, x1, x2
+    # # Groupement 4
+    # li x1, 0xffffffff 
+    # li x2, 0x00000000
+    # add x31, x1, x2
 
-    li x1, 0x00000000
-    li x2, 0xffffffff
-    add x31, x1, x2
+    # li x1, 0x00000000
+    # li x2, 0xffffffff
+    # add x31, x1, x2
 
-    li x1, 0xfffffffe
-    li x2, 0xffffffff
-    add x31, x1, x2
+    # li x1, 0xfffffffe
+    # li x2, 0xffffffff
+    # add x31, x1, x2
 
-    # Groupement 5
-    li x1, 0x80000000 
-    li x2, 0x00000001
-    add x31, x1, x2
+    # # Groupement 5
+    # li x1, 0x80000000 
+    # li x2, 0x00000001
+    # add x31, x1, x2
 
 
 	# max_cycle 300
@@ -93,10 +93,11 @@
     # 00007fff
     # 00000000
     # 00007fff
+	# pout_end
+
     # 00007fff
     # ffff8000
     # ffffffff
     # 00000001
     # ffffffff
     # 7fffffff
-	# pout_end
