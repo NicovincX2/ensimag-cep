@@ -54,17 +54,10 @@
     srli x31, x1, 31
 
     # Groupement 4
-    li x1, 15
-    srli x31, x0, x1
+    srli x31, x0, 4
 
-    li x1, 32
-    srli x31, x1, x0
-
-    srli x31, zero, zero
-
-    li x1, 1024
-    li x2, 2048
-    srli x0, x1, x2  # mv x31, x0
+    li x1, 33
+    srli x0, x1, 10  # mv x31, x0
 
 	# max_cycle 300
 	# pout_start
@@ -88,7 +81,5 @@
     # 00424242
     # 00008484
     # 00000000
-    # 00000000
-    # 00000020
     # 00000000
 	# pout_end
