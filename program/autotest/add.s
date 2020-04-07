@@ -1,10 +1,8 @@
 # TAG = add
 
-#include "test_macros.h"
+.include "test_macros.S"
 
-RVTEST_RV32U
-
-    TEST_RR_OP(add, 0x00000000, 0x00000000);
+    TEST_RR_OP add, 0x00000000, 0x00000000
 
     .text
     # add rd, rs1, rs2
