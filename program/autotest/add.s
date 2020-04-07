@@ -1,10 +1,14 @@
 # TAG = add
+
+#include "test_macros.h"
+
     .text
-
     # add rd, rs1, rs2
-    # le registre x0 vaut toujours 0
-    add x31, zero, zero    # no operation
 
+    TEST_RR_OP(add, 0x00000000, 0x00000000);
+
+    # le registre x0 vaut toujours 0
+    add x31, zero, zero  # no operation
     addi x1, x0, 1
     addi x2, x0, 1
     add x31, x1, x2
@@ -24,8 +28,15 @@
     addi x2, x0, 1
     add x31, x1, x2
 
+    # On passe en hexa...
+    # li x1, 
+    # li x2, 
+    # add x31, x1, x2
+
+
 	# max_cycle 100
 	# pout_start
+    # 00000000
     # 00000000
     # 00000002
     # 00000000
