@@ -37,27 +37,27 @@
     li x1, 0xffffffff
     srli x31, x1, 31
 
-    # Groupement 3
-    li x1, 0x21212121
-    srli x31, x1, 0
+    # # Groupement 3
+    # li x1, 0x21212121
+    # srli x31, x1, 0
 
-    li x1, 0x21212121
-    srli x31, x1, 1
+    # li x1, 0x21212121
+    # srli x31, x1, 1
 
-    li x1, 0x21212121
-    srli x31, x1, 7
+    # li x1, 0x21212121
+    # srli x31, x1, 7
 
-    li x1, 0x21212121
-    srli x31, x1, 14
+    # li x1, 0x21212121
+    # srli x31, x1, 14
 
-    li x1, 0x21212121
-    srli x31, x1, 31
+    # li x1, 0x21212121
+    # srli x31, x1, 31
 
-    # Groupement 4
-    srli x31, x0, 4
+    # # Groupement 4
+    # srli x31, x0, 4
 
-    li x1, 33
-    srli x0, x1, 10  # mv x31, x0
+    # li x1, 33
+    # srli x0, x1, 10  # mv x31, x0
 
 	# max_cycle 300
 	# pout_start
@@ -76,10 +76,11 @@
     # 00424242
     # 00008484
     # 00000000
+	# pout_end
+
     # 21212121
     # 10909090
     # 00424242
     # 00008484
     # 00000000
     # 00000000
-	# pout_end
