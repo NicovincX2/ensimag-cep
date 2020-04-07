@@ -11,7 +11,7 @@
 	auipc x31, 0xffffe    # 0xffffe000 + 0x100c = 0xfffff00c
 
 	.align 3
-    lla a0, 1f + 10000
+    lla a0, 1f + 0x00002710
     jal a1, 1f
     1: sub x31, a0, a1
 
@@ -23,5 +23,5 @@
     # 00001004
 	# ef45a008
 	# fffff00c
-	# 00010000
+	# 00002710
 	# pout_end
