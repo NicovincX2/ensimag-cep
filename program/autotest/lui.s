@@ -15,7 +15,7 @@
 	lui x1, 0x80000
 	sra x31, x1, 20
 
-	lui x0, 0x80000  # à mv dans x31
+	lui x0, 0x80000  # mv x31, x0
 
 	# max_cycle 50
 	# pout_start
