@@ -22,19 +22,19 @@
     srli x31, x1, 31
 
     # Groupement 2
-    li x1, 0x7fffffff
+    li x1, 0xffffffff
     srli x31, x1, 0
 
-    li x1, 0x7fffffff
+    li x1, 0xffffffff
     srli x31, x1, 1
 
-    li x1, 0x7fffffff
+    li x1, 0xffffffff
     srli x31, x1, 7
 
-    li x1, 0x7fffffff
+    li x1, 0xffffffff
     srli x31, x1, 14
 
-    li x1, 0x7fffffff
+    li x1, 0xffffffff
     srli x31, x1, 31
 
     # Groupement 3
@@ -66,11 +66,11 @@
     # 01000000
     # 00020000
     # 00000001
+    # ffffffff
     # 7fffffff
-    # 3fffffff
-    # 00ffffff
-    # 0001ffff
-    # 00000000
+    # 01ffffff
+    # 0003ffff
+    # 00000001
     # 21212121
     # 10909090
     # 00424242
