@@ -51,6 +51,10 @@
     li x1, 0x7fffffff
     addi x31, x1, 0x001
 
+    # TODO : 
+    # source/destination tests
+    # tester pour differents nombre de cycles (ce ne sont pas des tests unitaires)
+
 	# max_cycle 100
 	# pout_start
     # 00000000
