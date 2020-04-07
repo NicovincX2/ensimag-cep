@@ -21,9 +21,13 @@
     addi x2, x0, 1
     add x31, x1, x2
 
-    # On passe en hexa...
+    # On passe en hexa avec lui
     li x1, 0xffff8000 
     li x2, 0x00000000
+    add x31, x1, x2
+
+    li x1, 0x80000000
+    li x2, 0x80000000
     add x31, x1, x2
 
 
@@ -38,4 +42,5 @@
     # 00000000
     # 000007FF
     # ffff8000
+    # 00000000
 	# pout_end
