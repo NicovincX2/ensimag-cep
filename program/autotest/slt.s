@@ -71,7 +71,7 @@
     li x1, -1
     slt x31, x0, x1
 
-    li x1, 1
+    li x1, -1
     slt x31, x1, x0
 
     slt x31, zero, zero
