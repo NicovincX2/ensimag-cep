@@ -1,10 +1,10 @@
 # TAG = add
 
-.macro TEST_RR_OP instruction val1 val2
-    li  x1, val1
-    li  x2, val2
-    instruction x31, x1, x2
-.endm
+    %macro TEST_RR_OP 3
+        li  x1, %2
+        li  x2, %3
+        %1 x31, x1, x2
+    %endmacro
 
     TEST_RR_OP add, 0x00000000, 0x00000000
 
