@@ -10,34 +10,38 @@
 
     li x1, 1
     li x2, 1
-    beq x1, x2, 2f
+    beq x1, x2, 1f
     1: li x31, 42
 
     li x1, -1
     li x2, -1
-    beq x1, x2, 2f
+    beq x1, x2, 1f
     1: li x31, 42
 
     # Branch op not taken
     li x1, 0
     li x2, 1
-    beq x1, x2, 2f
+    beq x1, x2, 1f
     li x31, 42
+    1:
 
     li x1, 1
     li x2, 0
-    beq x1, x2, 2f
+    beq x1, x2, 1f
     li x31, 42
+    1:
 
     li x1, -1
     li x2, 1
-    beq x1, x2, 2f
+    beq x1, x2, 1f
     li x31, 42
+    1:
 
     li x1, 1
     li x2, -1
-    beq x1, x2, 2f
+    beq x1, x2, 1f
     li x31, 42
+    1:
 
     # un original
     li x1, 1
