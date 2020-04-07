@@ -3,7 +3,7 @@
 
     # Groupement 1
     li x1, 0xff00ff00
-    andi x31, x1, 0xf0f
+    andi x31, x1, 0xffffff0f
 
     li x1, 0x0ff00ff0
     andi x31, x1, 0x0f0
