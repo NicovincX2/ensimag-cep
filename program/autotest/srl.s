@@ -27,69 +27,69 @@
     srl x31, x1, x2
 
     # Groupement 2
-    li x1, 0x7fffffff
-    li x2, 0
-    srl x31, x1, x2
+    # li x1, 0x7fffffff
+    # li x2, 0
+    # srl x31, x1, x2
 
-    li x1, 0x7fffffff
-    li x2, 1
-    srl x31, x1, x2
+    # li x1, 0x7fffffff
+    # li x2, 1
+    # srl x31, x1, x2
 
-    li x1, 0x7fffffff
-    li x2, 7
-    srl x31, x1, x2
+    # li x1, 0x7fffffff
+    # li x2, 7
+    # srl x31, x1, x2
 
-    li x1, 0x7fffffff
-    li x2, 14
-    srl x31, x1, x2
+    # li x1, 0x7fffffff
+    # li x2, 14
+    # srl x31, x1, x2
 
-    li x1, 0x7fffffff
-    li x2, 31
-    srl x31, x1, x2
+    # li x1, 0x7fffffff
+    # li x2, 31
+    # srl x31, x1, x2
 
-    # Groupement 3
-    li x1, 0x21212121
-    li x2, 0
-    srl x31, x1, x2
+    # # Groupement 3
+    # li x1, 0x21212121
+    # li x2, 0
+    # srl x31, x1, x2
 
-    li x1, 0x21212121
-    li x2, 1
-    srl x31, x1, x2
+    # li x1, 0x21212121
+    # li x2, 1
+    # srl x31, x1, x2
 
-    li x1, 0x21212121
-    li x2, 7
-    srl x31, x1, x2
+    # li x1, 0x21212121
+    # li x2, 7
+    # srl x31, x1, x2
 
-    li x1, 0x21212121
-    li x2, 14
-    srl x31, x1, x2
+    # li x1, 0x21212121
+    # li x2, 14
+    # srl x31, x1, x2
 
-    li x1, 0x21212121
-    li x2, 31
-    srl x31, x1, x2
+    # li x1, 0x21212121
+    # li x2, 31
+    # srl x31, x1, x2
 
-    # Groupement 4
-    li x1, 0x21212121
-    li x2, 0xffffffc0
-    srl x31, x1, x2
+    # # Groupement 4
+    # li x1, 0x21212121
+    # li x2, 0xffffffc0
+    # srl x31, x1, x2
 
-    li x1, 0x21212121
-    li x2, 0xffffffc1
-    srl x31, x1, x2
+    # li x1, 0x21212121
+    # li x2, 0xffffffc1
+    # srl x31, x1, x2
 
-    li x1, 0x21212121
-    li x2, 0xffffffc7
-    srl x31, x1, x2
+    # li x1, 0x21212121
+    # li x2, 0xffffffc7
+    # srl x31, x1, x2
 
-    li x1, 0x21212121
-    li x2, 0xffffffce
-    srl x31, x1, x2
+    # li x1, 0x21212121
+    # li x2, 0xffffffce
+    # srl x31, x1, x2
 
-    li x1, 0x21212121
-    li x2, 0xffffffff
-    srl x31, x1, x2
+    # li x1, 0x21212121
+    # li x2, 0xffffffff
+    # srl x31, x1, x2
 
-    # Groupement 5
+    # # Groupement 5
     # li x1, 15
     # srl x31, x0, x1
 
@@ -109,6 +109,8 @@
     # 01000000
     # 00020000
     # 00000001
+	# pout_end
+
     # ffffffff
     # 7fffffff
     # 01ffffff
@@ -124,8 +126,6 @@
     # 00424242
     # 00008484
     # 00000000
-	# pout_end
-
     # 00000000
     # 00000020
     # 00000000
