@@ -6,10 +6,10 @@
         %1 x31, x1, x2
     .endm
 
-    TEST_RR_OP add, 0x00000000, 0x00000000
-
     .text
     # add rd, rs1, rs2
+
+    TEST_RR_OP add, 0x00000000, 0x00000000
 
     # le registre x0 vaut toujours 0
     add x31, zero, zero  # no operation
