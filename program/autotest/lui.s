@@ -7,10 +7,10 @@
 	lui x31, 0x12345 #Test chargement d'une valeur quelconque
 
 	# D'autres tests
-	lui x31, 0x7ffff
+	lui x31, 0xfff7ffff
 	# sra x31, x31, 20
 
-	lui x31, 0x80000
+	lui x31, 0xfff80000
 	# sra x31, x31, 20
 
 	lui x0, 0x80000  # à mv dans x31
@@ -20,6 +20,6 @@
 	# 00000000
 	# FFFFF000
 	# 12345000
-	# 007ff000
-	# ff800000
+	# 000007ff
+	# fffff800
 	# pout_end
