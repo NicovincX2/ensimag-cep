@@ -1,10 +1,10 @@
 # TAG = add
 
-    %macro TEST_RR_OP 3
+    .macro TEST_RR_OP 3
         li  x1, %2
         li  x2, %3
         %1 x31, x1, x2
-    %endmacro
+    .endm
 
     TEST_RR_OP add, 0x00000000, 0x00000000
 
