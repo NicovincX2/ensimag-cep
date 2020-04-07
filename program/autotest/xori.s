@@ -29,6 +29,6 @@
     # f00ff00f
     # ff00ff00
     # 0ff00ff0
-    # 00ff00ff
+    # f00ff0ff
     # 000000f0
     # pout_end
