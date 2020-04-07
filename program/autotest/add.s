@@ -2,6 +2,8 @@
 
 #include "test_macros.h"
 
+RVTEST_RV32U
+
     TEST_RR_OP(add, 0x00000000, 0x00000000);
 
     .text

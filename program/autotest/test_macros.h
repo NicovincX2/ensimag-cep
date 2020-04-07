@@ -3,6 +3,9 @@
 #ifndef __test_macros_h__
 #define __test_macros_h__
 
+#define RVTEST_RV32U \
+  .macro init; \
+  .endm
 
 // Tests for an instruction with register-register operands
 
