@@ -62,17 +62,17 @@
     sub x31, x1, x2
 
     # Groupement 6
-    li x1, -15
-    sub x31, x0, x1
+    # li x1, -15
+    # sub x31, x0, x1
 
-    li x1, 32
-    sub x31, x0, x1
+    # li x1, 32
+    # sub x31, x0, x1
 
-    sub x31, zero, zero
+    # sub x31, zero, zero
 
-    li x1, 16
-    li x2, 30
-    sub x0, x1, x2  # mv x31, x0
+    # li x1, 16
+    # li x2, 30
+    # sub x0, x1, x2  # mv x31, x0
 
     # TODO : 
     # source/destination tests
@@ -94,7 +94,8 @@
     # 00000001
     # fffffffe
     # 00000000
+	# pout_end
+
     # 0000000f
     # 00000020
     # 00000000
-	# pout_end
