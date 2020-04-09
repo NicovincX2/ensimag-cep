@@ -48,6 +48,8 @@
     nop
     li x31, 2
 
+    .data
+    
     tdat:
     tdat4:  .word 0xf00ff00f
 
