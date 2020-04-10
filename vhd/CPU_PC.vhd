@@ -613,6 +613,11 @@ begin
                 state_d <= S_Fetch;
 
 ---------- Instructions de chargement à partir de la mémoire ----------
+            --  At execution time two things happen: 
+            -- (1) an address is calculated by adding the base register b with the offset off, 
+            -- and (2) data is fetched from memory at that address.
+            -- Because it takes time to copy data from memory, it takes two machine cycles 
+            -- before the data is available in register $result.
             when S_LOAD1 =>
                 cmd.AD_Y_sel <= AD_Y_immI;
                 cmd.ad_we <= '1';
