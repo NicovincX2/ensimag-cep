@@ -337,6 +337,9 @@ begin
                     cmd.PC_we <= '1';
                     if status.IR(14 downto 12) = "010" then --sw
                         state_d <= S_SW;
+                    else
+                        state_d <= S_ERROR;
+                    end if;
                 
 				else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
@@ -634,6 +637,7 @@ begin
                     state_d <= S_LHU;
                 else -- on n'est jamais trop prudent
                     state_d <= S_Error;
+                end if;
                     
             when S_LW =>
                 --lw rd, imm(rs1)
