@@ -1,5 +1,11 @@
 # TAG = lw
 
+    .data
+    
+    # tdat:
+tdat4:  
+    .word 0xf00ff00f
+
     .text
 
     # # test avec offset positif
@@ -17,7 +23,6 @@
 
     # test avec offset négatif
     la x1, tdat4
-    li x31, 0
     lw x31, -12(x1)
 
     # la x1, tdat4
@@ -49,14 +54,8 @@
     # nop
     # li x31, 2
 
-    .data
-    
-    # tdat:
-    tdat4:  .word 0xf00ff00f
-
     # max_cycle 300
 	# pout_start
-    # 00000000
     # 00ff00ff
     # pout_end
 
