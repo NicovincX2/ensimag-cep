@@ -329,7 +329,10 @@ begin
                     -- on ne peut pas le mettre dans fetch comme pour auipc
                     -- IR n'est disponible que mtn
                     state_d <= S_BRS;
-				elsif status.IR(6 downto 0) = "0000011" then -- lw, lb, lbu, lhu
+                elsif status.IR(6 downto 0) = "0000011" then -- lw, lb, lbu, lhu
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
                     state_d <= S_LOAD1;
                 elsif status.IR(6 downto 0) = "0100011" then -- sw, 
                     cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
@@ -624,7 +627,7 @@ begin
                 cmd.ADDR_sel <= ADDR_from_ad;
                 cmd.mem_ce <= '1';
                 cmd.mem_we <= '0';
-
+                -- next state
                 if status.IR(14 downto 12) = "000" then
                     state_d <= S_LB;
                 elsif status.IR(14 downto 12) = "001" then
