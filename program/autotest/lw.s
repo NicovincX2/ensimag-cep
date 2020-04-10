@@ -1,12 +1,12 @@
 # TAG = lw
 
-    .data
-    test: .word 0xf00ff00f
-
     .text
 
     la x1, test
     lw x31, 0(x1)
+
+    .data
+    test: .word 0xf00ff00f
 
     # test avec offset positif
     # la x1, tdat
