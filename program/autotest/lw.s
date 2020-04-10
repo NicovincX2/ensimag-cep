@@ -50,7 +50,7 @@
 
     .data
     
-    tdat:
+    # tdat:
     tdat4:  .word 0xf00ff00f
 
     # max_cycle 300
@@ -61,11 +61,10 @@
     # f00ff00f
     # pout_end
 
-    # 00000000
-    # 00000000
-    # 00000000
-    # 00000000
-
+    # 00ff00ff
+    # ff00ff00
+    # 0ff00ff0
+    # f00ff00f
     # 00ff00ff
     # ff00ff00
     # 00ff00ff
