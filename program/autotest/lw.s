@@ -1,14 +1,15 @@
 # TAG = lw
 
-    .data
-    test: .word 0xf00ff00f
-    tdat: 
-    tdat4: .word 0xf00ff00f
-
     .text
 
     la x1, test
     lw x31, 0(x1)
+
+    .data
+    sentinelle: .word 0xFFFFFFFF
+    test: .word 0xf00ff00f
+    # tdat: 
+    # tdat4: .word 0xf00ff00f
 
     # On pourrait faire des load d'instructions mais je ne vois pas l'intérêt.
 
