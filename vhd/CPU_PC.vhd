@@ -49,15 +49,20 @@ architecture RTL of CPU_PC is
         S_BRS,
         S_SLTRS,
         S_SLTIMM,
-		S_ADD_LW,
-		S_RE_LW,
-        S_WR_LW
+		S_LOAD1,
+        S_LOAD2,
+        S_LW,
+        S_SW,
+        S_LB;
+        S_LH;
+        S_LBU;
+        S_LHU
     );
     -- S_BRS : beq, bge, bgeu, blt, bltu, bne
     -- S_SLTRS : slt, sltu
     -- S_SLTIMM : slti, sltiu
-	-- S_RE_LW : lecture adresse mémoire
-	-- S_WR_LW : chargement registre
+	-- S_LOAD1 : lecture adresse mémoire
+	-- S_LOAD2 : chargement registre
     signal state_d, state_q : State_type;
 
 
@@ -324,10 +329,15 @@ begin
                     -- on ne peut pas le mettre dans fetch comme pour auipc
                     -- IR n'est disponible que mtn
                     state_d <= S_BRS;
-				elsif (status.IR(6 downto 0) = "0000011" and
-					-- lw
-					status.IR(14 downto 12) = "010") then
-					state_d <= S_RE_LW;
+				elsif status.IR(6 downto 0) = "0000011" then -- lw, lb, lbu, lhu
+                    state_d <= S_LOAD1;
+                elsif status.IR(6 downto 0) = "0100011" then -- sw, 
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '1';
+                    if status.IR(14 downto 12) = "010" then --sw
+                        state_d <= S_SW;
+                
 				else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
                 end if;
@@ -601,35 +611,46 @@ begin
                 state_d <= S_Fetch;
 
 ---------- Instructions de chargement à partir de la mémoire ----------
-            when S_ADD_LW =>
-                cmd.mem_ce <= '0';
-                cmd.mem_we <= '0';
-                cmd.AD_we <= '1';
-                cmd.RF_we <= '0';
+            when S_LOAD1 =>
                 cmd.AD_Y_sel <= AD_Y_immI;
-                state_d <= S_RE_LW;
-
-            when S_RE_LW =>
-				--lw rd, imm(rs1)
-				cmd.mem_ce <= '1';
-				cmd.mem_we <= '0';
-				cmd.AD_we <= '0';
-				cmd.RF_we <= '0';
-                cmd.ADDR_sel <= ADDR_from_ad;
+                cmd.ad_we <= '1';
                 --next state
-				state_d <= S_WR_LW;
+				state_d <= S_LOAD2;
 
-			when S_WR_LW =>
-				cmd.RF_SIGN_enable <= '1';
-				cmd.RF_SIZE_sel <= RF_SIZE_word;
-				cmd.RF_we <= '1';
-				cmd.Data_sel <= DATA_from_mem;
-                --Incrémentation de PC
-                cmd.ADDR_sel <= ADDR_from_pc;
+            when S_LOAD2 =>
+                cmd.ADDR_sel <= ADDR_from_ad;
                 cmd.mem_ce <= '1';
                 cmd.mem_we <= '0';
+
+                if status.IR(14 downto 12) = "000" then
+                    state_d <= S_LB;
+                elsif status.IR(14 downto 12) = "001" then
+                    state_d <= S_LH;
+                elsif status.IR(14 downto 12) = "010" then
+                    state_d <= S_LW;
+                elsif status.IR(14 downto 12) = "100" then
+                    state_d <= S_LBU;
+                elsif status.IR(14 downto 12) = "101" then
+                    state_d <= S_LHU;
+                else -- on n'est jamais trop prudent
+                    state_d <= S_Error;
+                    
+            when S_LW =>
+                --lw rd, imm(rs1)
+                cmd.DATA_sel <= DATA_from_mem;
+                cmd.RF_we <= '1';
+                cmd.RF_SIZE_sel <= RF_SIZE_word;
+                cmd.RF_SIGN_enable <= '0';
                 --next state
-				state_d <= S_Fetch;
+                state_d <= S_Pre_Fetch;
+            
+            when S_LB =>
+                cmd.DATA_sel <= DATA_from_mem;
+                cmd.RF_we <= '1';
+                cmd.RF_SIZE_sel <= RF_SIZE_byte;
+                cmd.RF_SIGN_enable <= '1';
+                --next state
+				state_d <= S_Pre_Fetch;
 ---------- Instructions de sauvegarde en mémoire ----------
 
 ---------- Instructions d'accès aux CSR ----------
