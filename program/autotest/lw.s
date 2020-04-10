@@ -2,9 +2,8 @@
 
     .data
     
-# tdat:
 test:  
-    .word 0xf00ff00f
+    .word 0x00ff00ff
 
     .text
 
