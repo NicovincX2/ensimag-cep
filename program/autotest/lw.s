@@ -5,8 +5,13 @@
     # tdat:
 tdat4:  
     .word 0xf00ff00f
+test:
+    .word 0x6ABCDEF9
 
     .text
+
+    la x1, test
+    lw x31, 0(x1)
 
     # # test avec offset positif
     # la x1, tdat
@@ -31,8 +36,8 @@ tdat4:
     # la x1, tdat4
     # lw x31, -4(x1)
 
-    la x1, tdat4
-    lw x31, 0(x1)
+    # la x1, tdat4
+    # lw x31, 0(x1)
 
     # # test avec base négative
     # la x1, tdat
@@ -56,13 +61,13 @@ tdat4:
 
     # max_cycle 300
 	# pout_start
-    # f00ff00f
+    # fffffff9
     # pout_end
 
     # 00ff00ff
     # ff00ff00
     # 0ff00ff0
-
+    # f00ff00f
     # 00ff00ff
     # ff00ff00
     # 0ff00ff0
