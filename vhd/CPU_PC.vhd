@@ -53,9 +53,9 @@ architecture RTL of CPU_PC is
         S_LOAD2,
         S_LW,
         S_SW,
-        S_LB;
-        S_LH;
-        S_LBU;
+        S_LB,
+        S_LH,
+        S_LBU,
         S_LHU
     );
     -- S_BRS : beq, bge, bgeu, blt, bltu, bne
