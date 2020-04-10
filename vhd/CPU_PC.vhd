@@ -688,7 +688,7 @@ begin
             when S_STORE2 =>
                 cmd.ADDR_sel <= ADDR_from_ad;
                 cmd.mem_ce <= '1';
-                cmd.mem_we <= '0';
+                cmd.mem_we <= '1';
                 if status.IR(14 downto 12) = "000" then -- sb
                     cmd.RF_SIZE_sel <= RF_SIZE_byte;
                     state_d <= S_Pre_Fetch;
