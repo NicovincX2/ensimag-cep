@@ -1,9 +1,7 @@
 # TAG = lw
 
-    .data
-    
-test:  
-    .word 0xf00ff00f
+    test:  
+        .word 0xf00ff00f
 
     .text
 
