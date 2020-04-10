@@ -58,7 +58,7 @@ test:
 
     # max_cycle 300
 	# pout_start
-    # fffff00f
+    # 0000000f
     # pout_end
 
     # 00ff00ff
