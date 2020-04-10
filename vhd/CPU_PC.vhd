@@ -51,6 +51,7 @@ architecture RTL of CPU_PC is
         S_SLTIMM,
 		S_LOAD1,
         S_LOAD2,
+        S_STORE,
         S_LW,
         S_SW,
         S_SB,
@@ -340,15 +341,7 @@ begin
                     cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
-                    if status.IR(14 downto 12) = "000" then -- sb
-                        state_d <= S_SB;
-                    elsif status.IR(14 downto 12) = "001" then -- sh
-                        state_d <= S_SH;
-                    elsif status.IR(14 downto 12) = "010" then --sw
-                        state_d <= S_SW;
-                    else
-                        state_d <= S_ERROR;
-                    end if;
+                    state_d <= S_STORE;
                 
 				else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
@@ -689,9 +682,20 @@ begin
                 --next state
 				state_d <= S_Pre_Fetch;
 ---------- Instructions de sauvegarde en mémoire ----------
-            when S_SW =>
+            when S_STORE =>
                 cmd.AD_Y_sel <= AD_Y_immS;
                 cmd.ad_we <= '1';
+                if status.IR(14 downto 12) = "000" then -- sb
+                    state_d <= S_SB;
+                elsif status.IR(14 downto 12) = "001" then -- sh
+                    state_d <= S_SH;
+                elsif status.IR(14 downto 12) = "010" then --sw
+                    state_d <= S_SW;
+                else
+                    state_d <= S_ERROR;
+                end if;
+
+            when S_SW =>
                 cmd.ADDR_sel <= ADDR_from_ad;
                 cmd.mem_ce <= '1';
                 cmd.mem_we <= '0';
@@ -699,8 +703,6 @@ begin
                 state_d <= S_Pre_Fetch;
 
             when S_SB =>
-                cmd.AD_Y_sel <= AD_Y_immS;
-                cmd.ad_we <= '1';
                 cmd.ADDR_sel <= ADDR_from_ad;
                 cmd.mem_ce <= '1';
                 cmd.mem_we <= '0';
@@ -708,8 +710,6 @@ begin
                 state_d <= S_Pre_Fetch;
 
             when S_SH =>
-                cmd.AD_Y_sel <= AD_Y_immS;
-                cmd.ad_we <= '1';
                 cmd.ADDR_sel <= ADDR_from_ad;
                 cmd.mem_ce <= '1';
                 cmd.mem_we <= '0';
