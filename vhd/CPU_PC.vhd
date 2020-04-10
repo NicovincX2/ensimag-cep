@@ -683,8 +683,9 @@ begin
 				state_d <= S_Pre_Fetch;
 ---------- Instructions de sauvegarde en mémoire ----------
             when S_STORE =>
-                cmd.AD_Y_sel <= AD_Y_immS;
-                cmd.ad_we <= '1';
+                cmd.ADDR_sel <= ADDR_from_ad;
+                cmd.mem_ce <= '1';
+                cmd.mem_we <= '0';
                 if status.IR(14 downto 12) = "000" then -- sb
                     state_d <= S_SB;
                 elsif status.IR(14 downto 12) = "001" then -- sh
@@ -696,23 +697,20 @@ begin
                 end if;
 
             when S_SW =>
-                cmd.ADDR_sel <= ADDR_from_ad;
-                cmd.mem_ce <= '1';
-                cmd.mem_we <= '0';
+                cmd.AD_Y_sel <= AD_Y_immS;
+                cmd.ad_we <= '1';
                 --next state
                 state_d <= S_Pre_Fetch;
 
             when S_SB =>
-                cmd.ADDR_sel <= ADDR_from_ad;
-                cmd.mem_ce <= '1';
-                cmd.mem_we <= '0';
+                cmd.AD_Y_sel <= AD_Y_immS;
+                cmd.ad_we <= '1';
                 --next state
                 state_d <= S_Pre_Fetch;
 
             when S_SH =>
-                cmd.ADDR_sel <= ADDR_from_ad;
-                cmd.mem_ce <= '1';
-                cmd.mem_we <= '0';
+                cmd.AD_Y_sel <= AD_Y_immS;
+                cmd.ad_we <= '1';
                 --next state
 				state_d <= S_Pre_Fetch;
 
