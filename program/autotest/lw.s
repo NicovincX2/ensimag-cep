@@ -2,12 +2,15 @@
 
     .data
     test: .word 0xf00ff00f
+    tdat: 
+    tdat4: .word 0xf00ff00f
 
     .text
 
-    li x31, 0x00000000
     la x1, test
     lw x31, 0(x1)
+
+    # On pourrait faire des load d'instructions mais je ne vois pas l'intérêt.
 
     # test avec offset positif
     # la x1, tdat
@@ -57,7 +60,6 @@
 
     # max_cycle 300
 	# pout_start
-    # 00000000
     # f00ff00f
     # pout_end
 
