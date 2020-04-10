@@ -51,11 +51,9 @@ architecture RTL of CPU_PC is
         S_SLTIMM,
 		S_LOAD1,
         S_LOAD2,
-        S_STORE,
+        S_STORE1,
+        S_STORE2,
         S_LW,
-        S_SW,
-        S_SB,
-        S_SH,
         S_LB,
         S_LH,
         S_LBU,
@@ -337,12 +335,11 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_LOAD1;
-                elsif status.IR(6 downto 0) = "0100011" then -- sw, 
+                elsif status.IR(6 downto 0) = "0100011" then -- sw, sb, sh 
                     cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
-                    state_d <= S_STORE;
-                
+                    state_d <= S_STORE1;
 				else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
                 end if;
@@ -682,38 +679,28 @@ begin
                 --next state
 				state_d <= S_Pre_Fetch;
 ---------- Instructions de sauvegarde en mémoire ----------
-            when S_STORE =>
+            when S_STORE1 =>
+                cmd.AD_Y_sel <= AD_Y_immS;
+                cmd.ad_we <= '1';
+                --next state
+                state_d <= S_STORE2;
+
+            when S_STORE2 =>
                 cmd.ADDR_sel <= ADDR_from_ad;
                 cmd.mem_ce <= '1';
                 cmd.mem_we <= '0';
                 if status.IR(14 downto 12) = "000" then -- sb
-                    state_d <= S_SB;
+                    cmd.RF_SIZE_sel <= RF_SIZE_byte;
+                    state_d <= S_Pre_Fetch;
                 elsif status.IR(14 downto 12) = "001" then -- sh
-                    state_d <= S_SH;
+                    cmd.RF_SIZE_sel <= RF_SIZE_half;
+                    state_d <= S_Pre_Fetch;
                 elsif status.IR(14 downto 12) = "010" then --sw
-                    state_d <= S_SW;
+                    cmd.RF_SIZE_sel <= RF_SIZE_word;
+                    state_d <= S_Pre_Fetch;
                 else
                     state_d <= S_ERROR;
                 end if;
-
-            when S_SW =>
-                cmd.AD_Y_sel <= AD_Y_immS;
-                cmd.ad_we <= '1';
-                --next state
-                state_d <= S_Pre_Fetch;
-
-            when S_SB =>
-                cmd.AD_Y_sel <= AD_Y_immS;
-                cmd.ad_we <= '1';
-                --next state
-                state_d <= S_Pre_Fetch;
-
-            when S_SH =>
-                cmd.AD_Y_sel <= AD_Y_immS;
-                cmd.ad_we <= '1';
-                --next state
-				state_d <= S_Pre_Fetch;
-
 
 ---------- Instructions d'accès aux CSR ----------
 
