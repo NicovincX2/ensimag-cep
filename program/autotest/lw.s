@@ -5,7 +5,7 @@
 
     .text
 
-    li x31, 0x00001000
+    li x31, 0x00000000
     la x1, test
     lw x31, 0(x1)
 
@@ -57,7 +57,7 @@
 
     # max_cycle 300
 	# pout_start
-    # 00001000
+    # 00000000
     # f00ff00f
     # pout_end
 
