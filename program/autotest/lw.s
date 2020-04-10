@@ -2,7 +2,8 @@
 
     .text
 
-    lw x31, 0(0xf00ff00f)
+    li x1, 0x1000
+    lw x31, 0(x1)
 
     # .data
     # test: .word 0xf00ff00f
@@ -55,8 +56,9 @@
 
     # max_cycle 300
 	# pout_start
-    # f00ff00f
+    # 00001000
     # pout_end
+
 
     # 00ff00ff
     # ff00ff00
