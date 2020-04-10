@@ -19,14 +19,14 @@
     la x1, tdat4
     lw x31, -12(x1)
 
-    la x1, tdat4
-    lw x31, -8(x1)
+    # la x1, tdat4
+    # lw x31, -8(x1)
 
-    la x1, tdat4
-    lw x31, -4(x1)
+    # la x1, tdat4
+    # lw x31, -4(x1)
 
-    la x1, tdat4
-    lw x31, 0(x1)
+    # la x1, tdat4
+    # lw x31, 0(x1)
 
     # # test avec base négative
     # la x1, tdat
@@ -56,10 +56,11 @@
     # max_cycle 300
 	# pout_start
     # 00ff00ff
+    # pout_end
+
     # ff00ff00
     # 0ff00ff0
     # f00ff00f
-    # pout_end
 
     # 00ff00ff
     # ff00ff00
