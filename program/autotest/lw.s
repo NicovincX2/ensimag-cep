@@ -3,17 +3,15 @@
     .data
     
 # tdat:
-# tdat4:  
-#     .word 0xf00ff00f
-test:
-    .word 0x6ABCDEF9
+test:  
+    .word 0xf00ff00f
 
     .text
 
     la x1, test
-    lw x31, 0x000(x1)
+    lw x31, 0(x1)
 
-    # # test avec offset positif
+    # test avec offset positif
     # la x1, tdat
     # lw x31, 0(x1)
 
@@ -61,7 +59,7 @@ test:
 
     # max_cycle 300
 	# pout_start
-    # 00000037
+    # 00ff00ff
     # pout_end
 
     # 00ff00ff
