@@ -3,7 +3,7 @@
     .data
     
 test:  
-    .word 0x00ff00ff
+    .word 0xff00ff00
 
     .text
 
