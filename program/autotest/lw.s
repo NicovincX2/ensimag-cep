@@ -2,7 +2,7 @@
 
     .text
 
-    li x1, 0x1000
+    lui x1, 0x1000
     lw x31, 0(x1)
 
     # .data
