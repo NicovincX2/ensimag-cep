@@ -2,11 +2,11 @@
 
     .text
 
-    la x1, test
+    la x1, 0xf00ff00f
     lw x31, 0(x1)
 
-    .data
-    test: .word 0xf00ff00f
+    # .data
+    # test: .word 0xf00ff00f
 
     # test avec offset positif
     # la x1, tdat
