@@ -665,6 +665,22 @@ begin
                 cmd.RF_SIZE_sel <= RF_SIZE_half;
                 cmd.RF_SIGN_enable <= '1';
                 --next state
+                state_d <= S_Pre_Fetch;
+                
+            when S_LBU =>
+                cmd.DATA_sel <= DATA_from_mem;
+                cmd.RF_we <= '1';
+                cmd.RF_SIZE_sel <= RF_SIZE_byte;
+                cmd.RF_SIGN_enable <= '1';
+                --next state
+                state_d <= S_Pre_Fetch;
+                
+            when S_LHU =>
+                cmd.DATA_sel <= DATA_from_mem;
+                cmd.RF_we <= '1';
+                cmd.RF_SIZE_sel <= RF_SIZE_half;
+                cmd.RF_SIGN_enable <= '1';
+                --next state
 				state_d <= S_Pre_Fetch;
 ---------- Instructions de sauvegarde en mémoire ----------
 
