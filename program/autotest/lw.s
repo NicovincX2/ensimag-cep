@@ -2,7 +2,7 @@
 
     .text
 
-    la x1, .word 0xf00ff00f
+    li x1, 0xf00ff00f
     lw x31, 0(x1)
 
     # .data
