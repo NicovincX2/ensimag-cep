@@ -3,7 +3,7 @@
     .data
     
 test:  
-    .word 0xff00ff00
+    .word 0xf00ff00f
 
     .text
 
@@ -58,7 +58,7 @@ test:
 
     # max_cycle 300
 	# pout_start
-    # 00ff00ff
+    # f00ff00f
     # pout_end
 
     # 00ff00ff
