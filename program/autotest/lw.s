@@ -6,12 +6,12 @@
 # tdat4:  
 #     .word 0xf00ff00f
 test:
-    .int 0x6ABCDEF9
+    .word 0x6ABCDEF9
 
     .text
 
-    la x30, test
-    lw x31, 0(x30)
+    la x1, test
+    lw x31, 0x000(x1)
 
     # # test avec offset positif
     # la x1, tdat
