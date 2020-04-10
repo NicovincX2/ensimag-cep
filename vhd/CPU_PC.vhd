@@ -690,7 +690,7 @@ begin
 				state_d <= S_Pre_Fetch;
 ---------- Instructions de sauvegarde en mémoire ----------
             when S_SW =>
-                cmd.AD_Y_sel <= AD_Y_immS
+                cmd.AD_Y_sel <= AD_Y_immS;
                 cmd.ad_we <= '1';
                 cmd.ADDR_sel <= ADDR_from_ad;
                 cmd.mem_ce <= '1';
@@ -699,7 +699,7 @@ begin
                 state_d <= S_Pre_Fetch;
 
             when S_SB =>
-                cmd.AD_Y_sel <= AD_Y_immS
+                cmd.AD_Y_sel <= AD_Y_immS;
                 cmd.ad_we <= '1';
                 cmd.ADDR_sel <= ADDR_from_ad;
                 cmd.mem_ce <= '1';
@@ -708,7 +708,7 @@ begin
                 state_d <= S_Pre_Fetch;
 
             when S_SH =>
-                cmd.AD_Y_sel <= AD_Y_immS
+                cmd.AD_Y_sel <= AD_Y_immS;
                 cmd.ad_we <= '1';
                 cmd.ADDR_sel <= ADDR_from_ad;
                 cmd.mem_ce <= '1';
