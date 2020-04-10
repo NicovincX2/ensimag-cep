@@ -2,11 +2,11 @@
 
     .data
     
-    # tdat:
-tdat4:  
-    .word 0xf00ff00f
+# tdat:
+# tdat4:  
+#     .word 0xf00ff00f
 test:
-    .word 0x6ABCDEF9
+    .int 0x6ABCDEF9
 
     .text
 
