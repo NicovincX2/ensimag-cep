@@ -10,8 +10,8 @@ test:
 
     .text
 
-    la x1, test
-    lw x31, 0(x1)
+    la x30, test
+    lw x31, 0(x30)
 
     # # test avec offset positif
     # la x1, tdat
