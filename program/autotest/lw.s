@@ -7,15 +7,15 @@
 	la x1, ADDR1
 	lw x31, 0(x1)
 
-	xor x1, x1
+	xor x1, x1, x1
 	la x1, ADDR1
 	lw x31, 4(x1)
 
-	xor x1, x1
+	xor x1, x1, x1
 	la x1, ADDR1
 	lw x31, 8(x1)
 
-	xor x1, x1
+	xor x1, x1, x1
 	la x1, ADDR1
 	lw x31, 12(x1)
 
