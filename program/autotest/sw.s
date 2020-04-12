@@ -3,11 +3,9 @@
 	.text
 
 	lui x1, 0
-	la x2, ADDR1
-	la x3, ADDR1
-	addi x3, x3, 4
+	lw x2, ADDR1
 	sw x1, 4(x2)
-	la x31, x3
+	lw x31, 4(x2)
 
 	#max_cycle 300
 	#pout_start
