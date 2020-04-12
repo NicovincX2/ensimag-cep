@@ -7,7 +7,7 @@
 	sw x1, 4(x2)
 	lw x31, 4(x2)
 
-	lui x1, -54594
+	lui x1, 54594
 	sw x1, 8(x2)
 	lw x31, 8(x2)
 
@@ -18,7 +18,7 @@
 	#max_cycle 300
 	#pout_start
 	#00000000
-	#FFFF2ABE
+	#0000D542
 	#000204DA
 	#pout_end
 
