@@ -7,8 +7,7 @@
 	sw x1, 4(x2)
 	lw x31, 4(x2)
 
-	lui x1, 0
-	addi x1, x1, 54594
+	lui x1, 54594
 	sw x1, 8(x2)
 	lw x31, 8(x2)
 
