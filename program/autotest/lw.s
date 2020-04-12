@@ -19,12 +19,29 @@
 	la x1, ADDR1
 	lw x31, 12(x1)
 
+	#Offset négatif
+	
+	xor x1, x1, x1
+	la x1, ADDR1
+	lw x31, -4(x1)
+	
+	xor x1, x1, x1
+	la x1, ADDR1
+	lw x31, -8(x1)
+
+	xor x1, x1, x1
+	la x1, ADDR1
+	lw x31, -12(x1)
+
 	#max_cycle 300
 	#pout_start
 	#F00FF00F
 	#F00FF013
 	#F00FF017
 	#F00FF01B
+	#F00FF00B
+	#F00FF007
+	#F00FF003
 	#pout_end
 
 	.data
