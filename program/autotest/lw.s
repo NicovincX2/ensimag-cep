@@ -81,17 +81,17 @@
     # nop
     # li x31, 2
 
-	#max_cycle 300
-	#pout_start
-	#F00FF00F
-	#F00FF013
-	#F00FF017
-	#F00FF01B
-	#F00FF00B
-	#F00FF007
-	#F00FF003
-	#00ff00ff
-	#pout_end
+	# max_cycle 300
+	# pout_start
+	# F00FF00F
+	# F00FF013
+	# F00FF017
+	# F00FF01B
+	# F00FF00B
+	# F00FF007
+	# F00FF003
+	# 00ff00ff
+	# pout_end
 
 
     # 00ff00ff
