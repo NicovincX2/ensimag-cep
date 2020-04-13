@@ -36,11 +36,11 @@
 	###############
 
 	# test avec offset positif
-    la x1, testdata
-    lw x31, 0(x1)
+    # la x1, testdata
+    # lw x31, 0(x1)
 
-    la x1, testdata
-    lw x31, 4(x1)
+    # la x1, testdata
+    # lw x31, 4(x1)
 
     # la x1, testdata
     # lw x31, 8(x1)
@@ -90,7 +90,6 @@
 	# F00FF00B
 	# F00FF007
 	# F00FF003
-	# 00ff00ff
 	# pout_end
 
 
