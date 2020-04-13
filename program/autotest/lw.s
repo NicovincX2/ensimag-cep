@@ -39,44 +39,44 @@
     la x1, testdata
     lw x31, 0(x1)
 
-    # la x1, tdat
-    # lw x31, 4(x1)
+    la x1, testdata
+    lw x31, 4(x1)
 
-    # la x1, tdat
+    # la x1, testdata
     # lw x31, 8(x1)
 
-    # la x1, tdat
+    # la x1, testdata
     # lw x31, 12(x1)
 
     # test avec offset négatif
-    # la x1, tdat4
+    # la x1, testdata4
     # lw x31, -12(x1)
 
-    # la x1, tdat4
+    # la x1, testdata4
     # lw x31, -8(x1)
 
-    # la x1, tdat4
+    # la x1, testdata4
     # lw x31, -4(x1)
 
-    # la x1, tdat4
+    # la x1, testdata4
     # lw x31, 0(x1)
 
     # # test avec base négative
-    # la x1, tdat
+    # la x1, testdata
     # addi x1, x1, -32
     # lw x31, 32(x1)
 
     # # test avec base non alignée
-    # la x1, tdat
+    # la x1, testdata
     # addi x1, x1, -3
     # lw x31, 7(x1)
 
     # # test écriture après lw
-    # la x1, tdat
+    # la x1, testdata
     # lw x31, 0(x1)
     # li x31, 2
 
-    # la x1, tdat
+    # la x1, testdata
     # lw x31, 0(x1)
     # nop
     # li x31, 2
@@ -90,7 +90,7 @@
 	#F00FF00B
 	#F00FF007
 	#F00FF003
-	#f00ff00f
+	#00ff00ff
 	#pout_end
 
 
