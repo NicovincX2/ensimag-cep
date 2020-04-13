@@ -110,10 +110,10 @@
 
 	.data
 	ADDR1: .word 0xF00FF00F
-	testdata:
-	testdata1:  .word 0x00ff00ff
-	testdata2:  .word 0xff00ff00
-	testdata3:  .word 0x0ff00ff0
-	testdata4:  .word 0xf00ff00f
+	# testdata:
+	# testdata1:  .word 0x00ff00ff
+	# testdata2:  .word 0xff00ff00
+	# testdata3:  .word 0x0ff00ff0
+	# testdata4:  .word 0xf00ff00f
 
 
