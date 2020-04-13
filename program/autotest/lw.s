@@ -36,7 +36,7 @@
 	###############
 
 	# test avec offset positif
-    la x1, tdat
+    la x1, testdata
     lw x31, 0(x1)
 
     # la x1, tdat
