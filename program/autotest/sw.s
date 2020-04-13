@@ -15,12 +15,12 @@
 	sw x1, 12(x2)
 	lw x31, 12(x2)
 
-	#max_cycle 300
-	#pout_start
-	#00000000
-	#0000D542
-	#000204DA
-	#pout_end
+	# max_cycle 300
+	# pout_start
+	# 00000000
+	# 0000D542
+	# 000204DA
+	# pout_end
 
 	.data
 	ADDR1: .word 0xF00FF00F
