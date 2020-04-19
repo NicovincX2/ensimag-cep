@@ -9,23 +9,23 @@
     # lh x31, 0(x1)
 
     # la x1, testdata
-    # lh x31, 1(x1)
-
-    # la x1, testdata
     # lh x31, 2(x1)
 
     # la x1, testdata
-    # lh x31, 3(x1)
+    # lh x31, 4(x1)
+
+    # la x1, testdata
+    # lh x31, 6(x1)
 
     # test avec offset négatif
     # la x1, testdata4
-    # lh x31, -3(x1)
+    # lh x31, -6(x1)
+
+    # la x1, testdata4
+    # lh x31, -4(x1)
 
     # la x1, testdata4
     # lh x31, -2(x1)
-
-    # la x1, testdata4
-    # lh x31, -1(x1)
 
     # la x1, testdata4
     # lh x31, 0(x1)
@@ -37,7 +37,7 @@
 
     # # test avec base non alignée
     # la x1, testdata
-    # addi x1, x1, -6
+    # addi x1, x1, -5
     # lh x31, 7(x1)
 
     # # test écriture après lh
