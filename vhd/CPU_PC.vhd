@@ -57,7 +57,9 @@ architecture RTL of CPU_PC is
         S_LB,
         S_LH,
         S_LBU,
-        S_LHU
+        S_LHU,
+        S_JAL,
+        S_JALR
     );
     -- S_BRS : beq, bge, bgeu, blt, bltu, bne
     -- S_SLTRS : slt, sltu
@@ -586,6 +588,31 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                 end if;
+                -- next state
+                state_d <= S_Pre_Fetch;
+            
+            when S_JAL =>
+                cmd.To_PC_Y_sel <= TO_PC_Y_immJ;
+                cmd.PC_sel <= PC_from_pc;
+                cmd.PC_we <= '1';
+                
+                cmd.PC_X_sel <= PC_X_pc;
+                cmd.PC_Y_sel <= PC_Y_cst_x04;
+                cmd.DATA_sel <= DATA_from_pc;
+                cmd.RF_we <= '1';
+                -- next state
+                state_d <= S_Pre_Fetch;
+            
+            when S_JALR =>
+                cmd.ALU_Y_sel <= ALU_Y_immI;
+                cmd.ALU_op <= ALU_plus;
+                cmd.PC_X_sel <= PC_X_pc;
+                cmd.PC_Y_sel <= PC_Y_cst_x04;
+                cmd.RF_we <= '1';
+                -- lecture mem[pc]
+                cmd.PC_sel <= PC_from_alu;
+                cmd.PC_we <= '1';
+                cmd.DATA_sel <= DATA_from_pc;
                 -- next state
                 state_d <= S_Pre_Fetch;
 
