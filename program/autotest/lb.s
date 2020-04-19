@@ -70,6 +70,7 @@
     # ffffffff
     # 00000002
 
+    .data
 	testdata:
 	testdata1:  .byte 0xff
 	testdata2:  .byte 0x00
