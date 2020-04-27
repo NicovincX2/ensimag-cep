@@ -2,54 +2,47 @@
 
 	.text
 
+	#Offset positif
 	
-	# Les tests qui suivent devraient fonctionner mais
-	# non à cause d'un mauvaise génération des fichiers .mem
-	# test avec offset positif
-     la x1, testdata
-     lw x31, 0(x1)
+	la x1, ADDR1
+	lw x31, 0(x1)
 
-     la x1, testdata
-     lw x31, 4(x1)
+	lw x31, 4(x1)
 
-     la x1, testdata
-     lw x31, 8(x1)
+	lw x31, 8(x1)
 
-     la x1, testdata
-     lw x31, 12(x1)
-
-     #test avec offset négatif
-     la x1, testdata4
-     lw x31, -12(x1)
-
-     la x1, testdata4
-     lw x31, -8(x1)
-
-     la x1, testdata4
-     lw x31, -4(x1)
-
-     la x1, testdata4
-     lw x31, 0(x1)
-
-
-	# max_cycle 300
-	# pout_start
+	lw x31, 12(x1)
 	
-	# 00ff00ff
-    # ff00ff00
-    # 0ff00ff0
-    # f00ff00f
-    # 00ff00ff
-    # ff00ff00
-    # 0ff00ff0
-    # f00ff00f
-	# pout_end
+	#Offset négatif
+	
+	la x1, ADDR1
+	addi x1, x1, 12
+
+	lw x31, 0(x1)
+
+	lw x31, -4(x1)
+
+	lw x31, -8(x1)
+
+	lw x31, -12(x1)
+
+	la x1, test_data
+	lw x31, 0(x1)
+
+	#max_cycle 300
+	#pout_start
+	#F00FF00F
+	#DEADBEEF
+	#1BADCAFE
+	#00BADA55
+	#00BADA55
+	#1BADCAFE
+	#DEADBEEF
+	#F00FF00F
+	#DEADBEEF
+	#pout_end
 
 	.data
-	testdata:
-	testdata1:  .word 0x00ff00ff
-	testdata2:  .word 0xff00ff00
-	testdata3:  .word 0x0ff00ff0
-	testdata4:  .word 0xf00ff00f
-
-
+	ADDR1: .word 0xF00FF00F, 0xDEADBEEF, 0x1BADCAFE, 0x00BADA55
+	test_data:
+	test_data1: .word 0xDEADBEEF
