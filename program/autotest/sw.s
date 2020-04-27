@@ -3,7 +3,7 @@
 	.text
 
 	lui x1, 0 
-	lw x2, ADDR1 
+	la x2, ADDR1
 	sw x1, 4(x2)
 	lw x31, 4(x2)
 
