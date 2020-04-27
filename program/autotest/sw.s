@@ -4,12 +4,12 @@
 
 	lui x1, 0 
 	lw x2, ADDR1 
-	#sw x1, 4(x2)
-	lw x31, x2
+	sw x1, 4(x2)
+	lw x31, 4(x2)
 
 	# max_cycle 300
 	# pout_start
-	# F00FF00F
+	# 00000000
 	# pout_end
     
 	.data
