@@ -12,6 +12,19 @@
 	lw x31, 8(x1)
 
 	lw x31, 12(x1)
+	
+	#Offset négatif
+	
+	la x1, ADDR1
+	addi x1, x1, 12
+
+	lw x31, 0(x1)
+
+	lw x31, -4(x1)
+
+	lw x31, -8(x1)
+
+	lw x31, -12(x1)
 
 	#max_cycle 300
 	#pout_start
@@ -19,6 +32,10 @@
 	#DEADBEEF
 	#1BADCAFE
 	#00BADA55
+	#00BADA55
+	#1BADCAFE
+	#DEADBEEF
+	#F00FF00F
 	#pout_end
 
 	.data
