@@ -47,14 +47,14 @@
 	
 	# Base négative
 	la  x1, testdata9
-    li  x2, 0x5678
+    li  x2, 0x12345678
     addi x4, x1, -32
     sh x2, 32(x4)
     lh x31, 0(x1)
 	
 	# Base non alignée
 	la  x1, testdata9
-    li  x2, 0x3098
+    li  x2, 0x00003098
     addi x1, x1, -3
     sh x2, 7(x1)
     la  x4, testdata10
