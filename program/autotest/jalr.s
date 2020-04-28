@@ -5,7 +5,7 @@
     li t0, 0
     li x31, 42  # on a 42 si tout se passe bien
 
-    test 1
+    # test 1
     la   t1, target_2
 
     jalr t0, t1
