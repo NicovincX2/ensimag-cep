@@ -6,9 +6,9 @@
 	# test avec offset positif
     la x1, testdata
     lb x31, 0(x1)
-    lb x31, 4(x1)
-    lb x31, 8(x1)
-    lb x31, 12(x1)
+    lb x31, 1(x1)
+    lb x31, 2(x1)
+    lb x31, 3(x1)
 
     # # test avec offset négatif
     # la x1, testdata4
