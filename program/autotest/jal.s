@@ -2,8 +2,8 @@
 
     .text
 
-    # li  ra, 0
-    # li x31, 42  # on a 42 si tout se passe bien
+    li  ra, 0
+    li x31, 42  # on a 42 si tout se passe bien
 
     # jal x4, target_2
 
@@ -32,6 +32,7 @@
 
     # max_cycle 300
 	# pout_start
+    # 0000002a
     # 00000003
     # pout_end
 
