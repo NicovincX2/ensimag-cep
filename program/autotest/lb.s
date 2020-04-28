@@ -40,14 +40,14 @@
     lb x31, 7(x1)
 
     # test écriture après lw
-    la x1, testdata
-    lb x31, 0(x1)
-    li x31, 2
+    # la x1, testdata
+    # lb x31, 0(x1)
+    # li x31, 2
 
-    la x1, testdata
-    lb x31, 0(x1)
-    nop
-    li x31, 2
+    # la x1, testdata
+    # lb x31, 0(x1)
+    # nop
+    # li x31, 2
 
 
 	# max_cycle 300
@@ -62,11 +62,12 @@
     # 0000000f
     # ffffffff
     # 00000000
-    # 000000ff
-    # 00000002
-    # 000000ff
-    # 00000002
 	# pout_end
+
+    # ffffffff
+    # 00000002
+    # ffffffff
+    # 00000002
 
     .data
 	testdata:
