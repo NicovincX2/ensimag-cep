@@ -62,9 +62,9 @@
     # 0000000f
     # ffffffff
     # 00000000
-    # ffffffff
+    # 000000ff
     # 00000002
-    # ffffffff
+    # 000000ff
     # 00000002
 	# pout_end
 
