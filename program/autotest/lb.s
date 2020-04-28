@@ -2,7 +2,7 @@
 
 	.text
 
-	la x1, test_data
+	la x1, testdata
 	lb x31, 0(x1)
 
 	# Les tests qui suivent devraient fonctionner
