@@ -37,7 +37,7 @@
     # un original
     li t0, 1
     la t1, 1f
-    jr t1, -4
+    jr t1
     addi t0, t0, 1
     addi t0, t0, 1
     addi t0, t0, 1
