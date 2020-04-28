@@ -348,7 +348,13 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_STORE1;
-                else
+				elsif status.IR(6 downto 0) = "1101111" then
+					if status.IR(14 downto 12) = "000" then
+						state_d <= S_JALR;
+					else
+						state_d <= S_JAL;
+					end if;
+				else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
                 end if;
 
