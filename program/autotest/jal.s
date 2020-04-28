@@ -9,7 +9,6 @@
 
     linkaddr_2:
         nop
-        nop
 
         j fail
 
@@ -18,6 +17,7 @@
         bne x2, x4, fail
 
     fail:
+        # Problème ici
         li x31, -42
 
     # un original
