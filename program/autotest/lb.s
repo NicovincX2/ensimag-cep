@@ -2,10 +2,13 @@
 
 	.text
 
+	la x1, testdata
+	lb x31, 0(x1)
+
 	# Les tests qui suivent devraient fonctionner
 	# test avec offset positif
-    la x1, testdata
-    lb x31, 0(x1)
+    #la x1, testdata
+    #lb x31, 0(x1)
 
     # la x1, testdata
     # lb x31, 1(x1)
@@ -70,7 +73,7 @@
     # 00000002
 
     .data
-	testdata:
+	testdata: .byte 0xff
 	testdata1:  .byte 0xff
 	testdata2:  .byte 0x00
 	testdata3:  .byte 0xf0
