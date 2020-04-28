@@ -5,23 +5,16 @@
 	# Offset positif
 	la x1, ADDR1
 	lw x31, 0(x1)
-
 	lw x31, 4(x1)
-
 	lw x31, 8(x1)
-
 	lw x31, 12(x1)
 	
 	# Offset négatif
 	la x1, ADDR1
 	addi x1, x1, 12
-
 	lw x31, 0(x1)
-
 	lw x31, -4(x1)
-
 	lw x31, -8(x1)
-
 	lw x31, -12(x1)
 
 	# Les tests qui suivent devraient fonctionner
