@@ -1,4 +1,4 @@
-#TAG = lbu
+# TAG = lbu
 
 	.text
 
