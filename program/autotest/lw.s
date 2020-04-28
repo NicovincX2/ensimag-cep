@@ -29,18 +29,18 @@
 	la x1, test_data
 	lw x31, 0(x1)
 
-	#max_cycle 300
-	#pout_start
-	#F00FF00F
-	#DEADBEEF
-	#1BADCAFE
-	#00BADA55
-	#00BADA55
-	#1BADCAFE
-	#DEADBEEF
-	#F00FF00F
-	#DEADBEEF
-	#pout_end
+	# max_cycle 300
+	# pout_start
+	# F00FF00F
+	# DEADBEEF
+	# 1BADCAFE
+	# 00BADA55
+	# 00BADA55
+	# 1BADCAFE
+	# DEADBEEF
+	# F00FF00F
+	# DEADBEEF
+	# pout_end
 
 	.data
 	ADDR1: .word 0xF00FF00F, 0xDEADBEEF, 0x1BADCAFE, 0x00BADA55
