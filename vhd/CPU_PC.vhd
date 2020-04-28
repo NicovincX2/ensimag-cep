@@ -86,7 +86,6 @@ begin
     begin
 
         -- Valeurs par défaut de cmd à définir selon les préférences de chacun
-        cmd.rst               <= 'U';
         cmd.ALU_op            <= UNDEFINED;
         cmd.LOGICAL_op        <= UNDEFINED;
         cmd.ALU_Y_sel         <= UNDEFINED;
@@ -94,12 +93,12 @@ begin
         cmd.SHIFTER_op        <= UNDEFINED;
         cmd.SHIFTER_Y_sel     <= UNDEFINED;
 
-        cmd.RF_we             <= 'U';
+        cmd.RF_we             <= '0';
         cmd.RF_SIZE_sel       <= UNDEFINED;
         cmd.RF_SIGN_enable    <= 'U';
         cmd.DATA_sel          <= UNDEFINED;
 
-        cmd.PC_we             <= 'U';
+        cmd.PC_we             <= '0';
         cmd.PC_sel            <= UNDEFINED;
 
         cmd.PC_X_sel          <= UNDEFINED;
@@ -107,16 +106,16 @@ begin
 
         cmd.TO_PC_Y_sel       <= UNDEFINED;
 
-        cmd.AD_we             <= 'U';
+        cmd.AD_we             <= '0';
         cmd.AD_Y_sel          <= UNDEFINED;
 
-        cmd.IR_we             <= 'U';
+        cmd.IR_we             <= '0';
 
         cmd.ADDR_sel          <= UNDEFINED;
-        cmd.mem_we            <= 'U';
-        cmd.mem_ce            <= 'U';
+        cmd.mem_we            <= '0';
+        cmd.mem_ce            <= '0';
 
-        cmd.cs.CSR_we            <= UNDEFINED;
+        cmd.cs.CSR_we            <= CSR_None;
 
         cmd.cs.TO_CSR_sel        <= UNDEFINED;
         cmd.cs.CSR_sel           <= UNDEFINED;
@@ -152,16 +151,23 @@ begin
                 -- IR <- mem_datain, disponible au prochain état
                 cmd.IR_we <= '1';
                 -- on ne fait pas l'état decode, incrémentation après coup dans l'état concerné
-                if status.IR(6 downto 0) = "0010111" then -- code op auipc
-                    state_d <= S_AUIPC;
-                else
-                    state_d <= S_Decode;
-                end if;
+                --------------------------------------------------------------------------
+                -- FIXME: IR n'a pas encore pris sa valeur, comme vous le notez d'ailleurs
+                -- dans le commentaire juste au dessus, donc on ne peut pas tester sa valeur
+                --------------------------------------------------------------------------
+                -- if status.IR(6 downto 0) = "0010111" then -- code op auipc
+                --     state_d <= S_AUIPC;
+                -- else
+                --     state_d <= S_Decode;
+                -- end if;
+                state_d <= S_Decode;
 
             when S_Decode =>
                 -- On peut aussi utiliser un case, ...
                 -- et ne pas le faire juste pour les branchements et auipc
-                if status.IR(6 downto 0) = "0110111" then -- code op lui
+                if status.IR(6 downto 0) = "0010111" then -- code op auipc
+                    state_d <= S_AUIPC;
+                elsif status.IR(6 downto 0) = "0110111" then -- code op lui
                     cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
@@ -342,7 +348,7 @@ begin
                     cmd.PC_sel <= PC_from_pc;
                     cmd.PC_we <= '1';
                     state_d <= S_STORE1;
-				else
+                else
                     state_d <= S_ERROR; -- pour détecter les ratés de décodage
                 end if;
 
