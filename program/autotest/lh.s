@@ -2,8 +2,7 @@
 
 	.text
 
-	# Les tests qui suivent devraient fonctionner mais
-	# non à cause d'un mauvaise génération des fichiers .mem
+	# Les tests qui suivent devraient fonctionner
 	# test avec offset positif
     # la x1, testdata
     # lh x31, 0(x1)

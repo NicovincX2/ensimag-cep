@@ -26,9 +26,6 @@
 
 	lw x31, -12(x1)
 
-	la x1, test_data
-	lw x31, 0(x1)
-
 	# max_cycle 300
 	# pout_start
 	# F00FF00F
@@ -39,7 +36,6 @@
 	# 1BADCAFE
 	# DEADBEEF
 	# F00FF00F
-	# DEADBEEF
 	# pout_end
 
 	.data
