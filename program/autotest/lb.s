@@ -6,14 +6,8 @@
 	# test avec offset positif
     la x1, testdata
     lb x31, 0(x1)
-
-    la x1, testdata
     lb x31, 1(x1)
-
-    la x1, testdata
     lb x31, 2(x1)
-
-    la x1, testdata
     lb x31, 3(x1)
 
     # # test avec offset négatif
@@ -52,12 +46,16 @@
 
 	# max_cycle 300
 	# pout_start
+    # fffffff0
+    # 0000000f
+    # ffffff80
+    # 0000007f
+	# pout_end
+
     # ffffffff
     # 00000000
     # fffffff0
     # 0000000f
-	# pout_end
-
     # ffffffff
     # 00000000
     # fffffff0
@@ -70,7 +68,7 @@
     # 00000002
 
     .data
-	testdata: .word 0xff00f00f
+	testdata: .word 0xf00f807f
 
     # testdata:
 	# testdata1:  .byte 0xff
