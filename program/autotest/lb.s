@@ -3,7 +3,7 @@
 	.text
 
 	la x1, testdata
-	lb x31, 0(x1)
+	#lb x31, 0(x1)
 
 	# Les tests qui suivent devraient fonctionner
 	# test avec offset positif
@@ -55,7 +55,7 @@
 
 	# max_cycle 300
 	# pout_start
-    # ffffffff
+    # 000000ff
 	# pout_end
 
     # 00000000
