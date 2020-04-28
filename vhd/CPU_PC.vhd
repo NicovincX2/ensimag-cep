@@ -715,7 +715,8 @@ begin
                 cmd.RF_SIZE_sel <= RF_SIZE_half;
                 cmd.RF_SIGN_enable <= '0';
                 --next state
-				state_d <= S_Pre_Fetch;
+                state_d <= S_Pre_Fetch;
+
 ---------- Instructions de sauvegarde en mémoire ----------
             when S_STORE1 =>
                 cmd.AD_Y_sel <= AD_Y_immS;
