@@ -4,8 +4,8 @@
 
 	# Les tests qui suivent devraient fonctionner
 	# test avec offset positif
-    la x1, testdata
-    lb x31, 0(x1)
+    # la x1, testdata
+    # lb x31, 0(x1)
 
     # la x1, testdata
     # lb x31, 1(x1)
@@ -52,9 +52,9 @@
 
 	# max_cycle 300
 	# pout_start
-    # ffffffff
 	# pout_end
 	
+    # ffffffff
     # 00000000
     # fffffff0
     # 0000000f
