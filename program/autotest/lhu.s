@@ -1,4 +1,4 @@
-#TAG = lhu
+# TAG = lhu
 
 	.text
 
