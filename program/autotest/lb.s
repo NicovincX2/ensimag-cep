@@ -70,8 +70,9 @@
     # 00000002
 
     .data
-	testdata:
-    testdata1:  .word 0xff00f00f
+	testdata: .word 0xff00f00f
+
+    # testdata:
 	# testdata1:  .byte 0xff
 	# testdata2:  .byte 0x00
 	# testdata3:  .byte 0xf0
