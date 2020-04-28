@@ -3,7 +3,7 @@
 	.text
 
     # Les tests qui suivent devraient fonctionner
-	test avec offset positif
+	# test avec offset positif
     la x1, testdata
     lb x31, 0(x1)
 
