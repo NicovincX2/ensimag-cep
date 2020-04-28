@@ -52,7 +52,7 @@
 
 	# max_cycle 300
 	# pout_start
-    # ffffffff
+    # 0000000f
 	# pout_end
 
     # 00000000
@@ -71,7 +71,7 @@
 
     .data
 	testdata:
-	testdata1:  .byte 0x000000ff
+	testdata1:  .byte 0xff
 	testdata2:  .byte 0x00
 	testdata3:  .byte 0xf0
 	testdata4:  .byte 0x0f
