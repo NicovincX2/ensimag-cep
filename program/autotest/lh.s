@@ -51,8 +51,8 @@
 
 	# max_cycle 300
 	# pout_start
-    # ffff00f0
-    # 0000000f
+    # 000000ff
+    # ffffff00
     # pout_end
 
 	# 00000ff0
@@ -69,7 +69,7 @@
     # 00000002
 
     .data
-	testdata: .half 0x00f0, 0x000f
+	testdata: .half 0x00ff, 0xff00
 	#testdata1:  .half 0x00ff
 	#testdata2:  .half 0xff00
 	#testdata3:  .half 0x0ff0
