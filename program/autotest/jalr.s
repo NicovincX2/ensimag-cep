@@ -5,34 +5,34 @@
     li t0, 0
     li x31, 42  # on a 42 si tout se passe bien
 
-    # test 1
-    # la   t1, target_2
+    test 1
+    la   t1, target_2
 
-    # jalr t0, t1, 0
+    jalr t0, t1
 
-    # linkaddr_2:
-    #     j fail
+    linkaddr_2:
+        j fail
 
-    # target_2:
-    #     la  t1, linkaddr_2
-    #     bne t0, t1, fail
+    target_2:
+        la  t1, linkaddr_2
+        bne t0, t1, fail
 
-    # # test 2
-    # la   t0, target_3
+    # test 2
+    la   t0, target_3
 
-    # jalr t0, t0, 0
+    jalr t0, t0
 
-    # linkaddr_3:
-    #     j fail
+    linkaddr_3:
+        j fail
 
-    # target_3:
-    #     la  t1, linkaddr_3
-    #     bne t0, t1, fail
+    target_3:
+        la  t1, linkaddr_3
+        bne t0, t1, fail
 
     
-    # fail:
-    #     # Problème ici
-    #     li x31, -42
+    fail:
+        # Problème ici
+        li x31, -42
 
     # un original
     li t0, 1
