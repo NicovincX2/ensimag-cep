@@ -31,7 +31,8 @@
 
     
     fail:
-        li x31, -42
+        # Problème ici
+        # li x31, -42
 
     # un original
     li t0, 1
