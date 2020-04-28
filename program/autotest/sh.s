@@ -72,7 +72,7 @@
     # 00000aa0
     # ffffa00a
     # 00005678
-    # ffff3098
+    # 00003098
 	# pout_end
     
 	.data
