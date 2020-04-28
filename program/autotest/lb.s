@@ -46,7 +46,7 @@
 
 	# max_cycle 300
 	# pout_start
-    # 000000f0
+    # 0000007f
 	# pout_end
 
     # ffffffff
