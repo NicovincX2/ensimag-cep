@@ -55,7 +55,7 @@
 	# Base non alignée
 	la  x1, testdata9
     li  x2, 0x00003098
-    addi x1, x1, -3
+    addi x1, x1, -5
     sh x2, 7(x1)
     la  x4, testdata10
     lh x31, 0(x4)
