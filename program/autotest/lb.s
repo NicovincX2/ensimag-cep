@@ -71,7 +71,7 @@
 
     .data
 	testdata:
-	testdata1:  .byte 0xff
+	testdata1:  .byte 0x000000ff
 	testdata2:  .byte 0x00
 	testdata3:  .byte 0xf0
 	testdata4:  .byte 0x0f
