@@ -9,9 +9,16 @@
 
 	lui x31, 0
 	jal x0, etiquette_test
+	j fin
 
 	etiquette_test:
 		lui x31, 0xfffff	
+		xor ra, ra, ra
+		add ra, x0, 0
+		ret
+		
+	fin:
+		lui x31, 0
 
     #linkaddr_2:
     #    nop
