@@ -10,6 +10,7 @@
     linkaddr_2:
         nop
         nop
+
         j fail
 
     target_2:
@@ -17,7 +18,7 @@
         bne x2, x4, fail
 
     fail:
-        # li x31, -42
+        li x31, -42
 
     # un original
     li ra, 1
