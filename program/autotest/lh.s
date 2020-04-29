@@ -4,16 +4,13 @@
 
 	# Les tests qui suivent devraient fonctionner
 	# test avec offset positif
-    la x1, testdata
+    la x1, testdata1
     lh x31, 0(x1)
-
     lh x31, 2(x1)
 
-    #la x1, testdata
-    #lh x31, 4(x1)
-
-    #la x1, testdata
-    #lh x31, 6(x1)
+    la x1, testdata2
+    lh x31, 4(x1)
+    lh x31, 6(x1)
 
     # test avec offset négatif
     #la x1, testdata4
@@ -53,10 +50,10 @@
 	# pout_start
     # 000000ff
     # ffffff00
+    # 00000ff0
+    # fffff00f
     # pout_end
 
-	# 00000ff0
-    # fffff00f
     # 000000ff
     # ffffff00
     # 00000ff0
@@ -69,8 +66,11 @@
     # 00000002
 
     .data
-	testdata: .half 0x00ff, 0xff00
-	#testdata1:  .half 0x00ff
-	#testdata2:  .half 0xff00
-	#testdata3:  .half 0x0ff0
-	#testdata4:  .half 0xf00f
+	testdata1: .half 0x00ff, 0xff00
+    testdata2: .half 0x0ff0, 0xf00f
+
+    # testdata:
+	# testdata1:  .half 0x00ff
+	# testdata2:  .half 0xff00
+	# testdata3:  .half 0x0ff0
+	# testdata4:  .half 0xf00f
