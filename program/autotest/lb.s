@@ -46,16 +46,12 @@
 
 	# max_cycle 300
 	# pout_start
-	# fffffff0
-	# 0000000f
-	# ffffff80
-	# 0000007f
-	# pout_end
-
-    # ffffffff
+	# ffffffff
     # 00000000
     # fffffff0
     # 0000000f
+	# pout_end
+
     # ffffffff
     # 00000000
     # fffffff0
@@ -68,7 +64,7 @@
     # 00000002
 
     .data
-	testdata : .byte 0xf0, 0x0f, 0x80, 0x7f
+	testdata : .byte 0xff, 0x00, 0xf0, 0x0f
 
     # testdata:
 	# testdata1:  .byte 0xff
