@@ -11,16 +11,16 @@
     lb x31, 3(x1)
 
     # test avec offset négatif
-    la x1, testdata
+    la x1, testdata4
     lb x31, -3(x1)
 
-    la x1, testdata
+    la x1, testdata4
     lb x31, -2(x1)
 
-    la x1, testdata
+    la x1, testdata4
     lb x31, -1(x1)
 
-    la x1, testdata
+    la x1, testdata4
     lb x31, 0(x1)
 
     # # test avec base négative
@@ -65,6 +65,7 @@
 
     .data
 	testdata : .byte 0xff, 0x00, 0xf0, 0x0f
+    testdata4 : .byte 0x0f, 0xf0, 0x00, 0xff
 
     # testdata:
 	# testdata1:  .byte 0xff
