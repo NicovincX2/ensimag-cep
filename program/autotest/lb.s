@@ -10,18 +10,18 @@
     lb x31, 2(x1)
     lb x31, 3(x1)
 
-    # # test avec offset négatif
-    # la x1, testdata4
-    # lb x31, -3(x1)
+    # test avec offset négatif
+    la x1, testdata
+    lb x31, -3(x1)
 
-    # la x1, testdata4
-    # lb x31, -2(x1)
+    la x1, testdata
+    lb x31, -2(x1)
 
-    # la x1, testdata4
-    # lb x31, -1(x1)
+    la x1, testdata
+    lb x31, -1(x1)
 
-    # la x1, testdata4
-    # lb x31, 0(x1)
+    la x1, testdata
+    lb x31, 0(x1)
 
     # # test avec base négative
     # la x1, testdata
@@ -50,12 +50,12 @@
     # 00000000
     # fffffff0
     # 0000000f
-	# pout_end
-
     # ffffffff
     # 00000000
     # fffffff0
     # 0000000f
+	# pout_end
+
     # ffffffff
     # 00000000
     # ffffffff
