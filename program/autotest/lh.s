@@ -8,21 +8,21 @@
     lh x31, 0(x1)
     lh x31, 2(x1)
 
-    # la x1, testdata2
+    # la x1, testdata
     # lh x31, 4(x1)
     # lh x31, 6(x1)
 
     # test avec offset négatif
-    # la x1, testdata2
+    # la x1, testdata4
     # lh x31, -6(x1)
 
-    # la x1, testdata2
+    # la x1, testdata4
     # lh x31, -4(x1)
 
-    # la x1, testdata1
+    # la x1, testdata4
     # lh x31, -2(x1)
 
-    # la x1, testdata1
+    # la x1, testdata4
     # lh x31, 0(x1)
 
     # test avec base négative
